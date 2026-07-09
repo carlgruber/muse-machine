@@ -1,0 +1,16 @@
+{
+  "name": "muse-machine-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that lets Claude play the Muse Machine web instrument",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:http": "node server-http.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "ws": "^8.18.0",
+    "zod": "^3.24.0"
+  }
+}

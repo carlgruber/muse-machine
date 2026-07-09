@@ -1,0 +1,5705 @@
+{
+  "name": "electric-daydream",
+  "title": "Electric Daydream",
+  "tempo": 112,
+  "parts": [
+    {
+      "kind": "arrangement",
+      "title": "Electric Daydream",
+      "tempo": 112,
+      "swing": 0.56,
+      "sheet": 6,
+      "tracks": [
+        {
+          "name": "Dream pads",
+          "voice": "pad",
+          "gain": 0.5,
+          "pan": -0.2,
+          "notes": [
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3"
+              ],
+              "beats": 4,
+              "vel": 0.7
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3"
+              ],
+              "beats": 4,
+              "vel": 0.7
+            },
+            {
+              "rest": true,
+              "beats": 32
+            },
+            {
+              "pitch": [
+                "G2",
+                "C3",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 0.9
+            },
+            {
+              "pitch": [
+                "A2",
+                "D3",
+                "F#3"
+              ],
+              "beats": 4,
+              "vel": 0.9
+            },
+            {
+              "pitch": [
+                "G2",
+                "C3",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 0.9
+            },
+            {
+              "pitch": [
+                "A2",
+                "D3",
+                "F#3"
+              ],
+              "beats": 4,
+              "vel": 0.9
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "A2",
+                "D3",
+                "F#3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "C3",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "A2",
+                "D3",
+                "F#3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "C3",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 16
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "A2",
+                "D3",
+                "F#3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "E3"
+              ],
+              "beats": 4,
+              "vel": 1
+            },
+            {
+              "pitch": [
+                "G2",
+                "B2",
+                "D3",
+                "G3"
+              ],
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "name": "Slink bass",
+          "voice": "bass",
+          "gain": 1,
+          "pan": 0,
+          "startBeat": 8,
+          "notes": [
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "F#2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "C3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "B2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.75,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.25,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "C#3",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G1",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "D3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E2",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.5,
+              "vel": 1
+            },
+            {
+              "pitch": "G2",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "name": "Funk clav",
+          "voice": "clav",
+          "gain": 0.75,
+          "pan": 0.35,
+          "startBeat": 8,
+          "notes": [
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 32
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "E3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "pitch": "C#4",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            }
+          ]
+        },
+        {
+          "name": "Skank guitar",
+          "voice": "eguitar",
+          "gain": 0.65,
+          "pan": -0.4,
+          "startBeat": 8,
+          "notes": [
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "F#4",
+                "A4",
+                "D4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C5"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C5"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C5"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "C5"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "B3",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": [
+                "G3",
+                "C#4",
+                "E4"
+              ],
+              "beats": 0.25,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "D4",
+                "F#4",
+                "A4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": [
+                "E4",
+                "G4",
+                "B4"
+              ],
+              "beats": 0.75,
+              "vel": 1
+            },
+            {
+              "rest": true,
+              "beats": 0.25
+            }
+          ]
+        },
+        {
+          "name": "Glitter arps",
+          "voice": "synthwave",
+          "gain": 0.45,
+          "pan": 0.45,
+          "startBeat": 56,
+          "notes": [
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "C4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "rest": true,
+              "beats": 16
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "F#4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "A3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "B3",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.25,
+              "vel": 0.75
+            },
+            {
+              "rest": true,
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "name": "Sun sparkle",
+          "voice": "glocken",
+          "gain": 0.4,
+          "pan": -0.3,
+          "startBeat": 56,
+          "notes": [
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "A5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "B5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "A5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "B5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "rest": true,
+              "beats": 16
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "A5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B5",
+              "beats": 1,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1.5
+            },
+            {
+              "pitch": "B5",
+              "beats": 0.5,
+              "vel": 0.9
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B5",
+              "beats": 4
+            }
+          ]
+        },
+        {
+          "name": "Falsetto lead",
+          "voice": "lead",
+          "gain": 0.8,
+          "pan": 0.1,
+          "startBeat": 8,
+          "notes": [
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "C#5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "B4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 2,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "C#5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 2
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "C#5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 2,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "F#5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "C5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 0.95
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 0.95
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "C5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "A4",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "C5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 0.5
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "C#5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "rest": true,
+              "beats": 1
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "B4",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 0.85
+            },
+            {
+              "pitch": "C#5",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "E4",
+              "beats": 0.5,
+              "vel": 0.85
+            },
+            {
+              "pitch": "A4",
+              "beats": 2,
+              "vel": 0.85
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "A5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "A4",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "F#5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "E5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "D5",
+              "beats": 0.5,
+              "vel": 1.1
+            },
+            {
+              "pitch": "B4",
+              "beats": 1,
+              "vel": 1.1
+            },
+            {
+              "pitch": "G4",
+              "beats": 2,
+              "vel": 1.1
+            }
+          ]
+        }
+      ],
+      "drums": {
+        "steps": {
+          "kick": "................x...............x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x..x..x...x.....x..x..x...x.....x..x..x...x.....x..x..x...x.....x...x...x...x...x...x...x...x...x...x...x...x...x...............",
+          "snare": "....................................x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x..x....x.......x..x....x.......x..x....x.......x..x....x.......x.......x.......x.......x.......x...................",
+          "hat": "................x.x.x.x.x.x.x.x.x.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.xxx.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.x.................",
+          "clap": "........................................................................................................................................................................................................................xxxxXXXX....x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......x.......................................................................x.......x.......x.......x.......x.......x...................",
+          "ride": "..............................................................x...............................................................x...................................................................................................x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...x...............................x...................................x...x...x...x...x...x...x...x...x...x...x...x.x..............."
+        },
+        "gain": 0.95
+      }
+    }
+  ]
+}

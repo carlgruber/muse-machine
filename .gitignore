@@ -1,0 +1,16 @@
+# local junk
+.DS_Store
+*.log
+
+# local dev config (Claude Code session settings, launch config)
+.claude/
+
+# heavyweight / machine-local: TTS venv + neural model (see README "Optional: TTS voice")
+mcp/tts-venv/
+mcp/models/
+
+# private TLS keys for the Claude Desktop connector (regenerate with mkcert)
+mcp/certs/
+
+# dependencies (npm install in mcp/)
+mcp/node_modules/
