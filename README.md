@@ -6,6 +6,13 @@ Muse Machine is a self-contained browser studio (pure Web Audio API, zero depend
 
 Hum four seconds of melody into the mic and say *"finish my thought"* — Claude transcribes it, treats it as a musical question, and writes the answer.
 
+## 🎬 Demo
+
+
+
+https://github.com/user-attachments/assets/607c642c-699d-4e70-b44e-ce299ac35299
+
+
 ---
 
 ## Quick start
