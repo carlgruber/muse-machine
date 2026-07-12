@@ -362,6 +362,17 @@ export function createBridge() {
         push({ push: 'songs', songs: await songList() });
         push({ push: 'perform', text: `🗑 deleted “${song.title || song.name}” (recoverable in songs/.trash/)` });
       }
+      else if (m.pageReq === 'save_song') {
+        const song = m.song || {};
+        if (!/^[a-z0-9][a-z0-9-]{0,59}$/.test(song.name || '') || !Array.isArray(song.parts) || !song.parts.length)
+          throw new Error('malformed song — nothing saved');
+        const names = new Set((await songList()).map(s => s.name));
+        const base = song.name.slice(0, 55);        // leave room for a suffix
+        for (let i = 2; names.has(song.name); i++) song.name = `${base}-${i}`;
+        await songSave(song);
+        push({ push: 'songs', songs: await songList() });
+        push({ push: 'perform', text: `💾 saved “${song.title || song.name}” — replay it anytime with ▶ Perform` });
+      }
       else if (m.pageReq === 'complete_riff') {
         // one composition at a time — a double-press must not queue two songs
         if (composingRiff) { push({ push: 'riff', text: '🤖 already composing — one song at a time, hang tight' }); return; }
@@ -381,7 +392,7 @@ export function createBridge() {
           const r = await send({ cmd: 'play_arrangement', title: arr.title, tempo: arr.tempo,
             swing: arr.swing, tracks: arr.tracks, drums: arr.drums, vocals,
             sheet: arr.leadTrack, pump: arr.pump, humanize: 0.45 });
-          push({ push: 'riff', text: `🤖 "${arr.title}" (${Math.round(r.seconds)}s) — ask Claude to save it if it's a keeper` });
+          push({ push: 'riff', text: `🤖 "${arr.title}" (${Math.round(r.seconds)}s) — hit 💾 Save Song if it's a keeper` });
         } finally { composingRiff = false; }
       }
     } catch (e) {

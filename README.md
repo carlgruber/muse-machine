@@ -109,7 +109,7 @@ Record from the mic or the instrument itself. Live tuner (note/frequency/cents).
 - **⬇ MIDI**: the current sheet as a single-track `.mid` (round-trips through the uploader).
 
 ### 🎼 Songbook
-Claude saves songs to `songs/*.json`; they appear in the page's Songbook and replay anytime via the **▶ Perform** button or the `play_song` tool — no AI required after composition. Songs are plain JSON you can read, diff, and version-control.
+Songs live in `songs/*.json` and replay anytime via the **▶ Perform** button or the `play_song` tool — no AI required after composition. Two ways in: Claude saves via `save_song`, or hit **💾 Save Song** after any band performance (it appears next to ⬇ Band MIDI) — name collisions auto-suffix instead of overwriting. Songs are plain JSON you can read, diff, and version-control.
 
 ---
 
