@@ -79,9 +79,17 @@ Claude's `play_arrangement` tool performs as a **full band on one sample-accurat
 
 ### 🎤 Sing → Song
 - **🪄 Songify** (Studio tab): one button, zero AI — records → transcribes → infers your key from a pitch-class histogram → fits a diatonic chord to every bar → the band plays your tune **with your own voice singing it**, then an instrument echoes it.
+- **🤖 Produce my hum** (Studio tab): the same, but Claude writes the whole production — type a style, and the reverse bridge (see Riff → Song below) has Claude compose a full arrangement whose `vocalStartBeats` place **your actual voice** singing the hook exactly where the production wants it. Subscription-billed, no API key.
 - **Hum → full production**: Claude reads your melody via `transcribe_recording` / `get_sheet` and arranges a real production around it in any style.
 - **Finish my thought**: hum a fragment; Claude analyzes it as an antecedent phrase and composes the consequent — your idea opens the song, gets developed (sequences, octave answers), and comes home.
 - **You are the vocalist**: arrangement vocals accept `source: "studio"` — your mic take is pitch-forced onto the written melody by the PSOLA vocal engine (autotuned, stackable to a 5-voice choir of you), mixed through a proper vocal channel strip. **No TTS anywhere in the chain.** Speak the words flat; they come out sung.
+
+### 🎸 Riff → Song
+Hit **🎸 Riff**, play a few notes on the keyboard, type a style or artist — then pick your tier:
+- **🤖 Claude completes it**: the bridge composes a full production around your motif — idiomatic voices, through-composed drums, a real arc — and the band performs it (takes a few minutes). It's a **reverse bridge**: the MCP server spawns headless Claude Code (`claude -p`) on your **Claude subscription — no API key**. (Claude Code strips its auth from MCP server environments, so the bridge borrows the `CLAUDE_CODE_OAUTH_TOKEN` from your own running Claude Code process — your token, your machine, your request. Set the token explicitly in the server's env to skip the borrowing.) Fallbacks, in order: a `claude` CLI login, a token from `claude setup-token` placed in the server's env, or `ANTHROPIC_API_KEY` (direct Opus 4.8 API call with a structured-output schema).
+- **⚡ Instant**: a zero-AI music-theory engine (key inference, diatonic motif development, style templates) — works offline, never burns a token.
+
+Enter in the style box picks 🤖 when the bridge is connected, ⚡ otherwise.
 
 ### 🌊 Waterfall play-along
 Synthesia-style falling notes that land on the real on-screen keys, for anything the staff can hold (built-ins, imports, Band Mode leads, your transcribed hums). Flow mode scores your timing (hit/miss/streak, gold bursts on hits); **✋ wait-for-me** holds each note at the line until you play it. Works with mouse, computer keyboard, or a real MIDI keyboard, and pauses itself when you switch tabs.

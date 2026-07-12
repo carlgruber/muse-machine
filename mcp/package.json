@@ -9,6 +9,7 @@
     "start:http": "node server-http.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0",
     "@modelcontextprotocol/sdk": "^1.11.0",
     "ws": "^8.18.0",
     "zod": "^3.24.0"

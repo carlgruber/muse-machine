@@ -361,8 +361,25 @@ export function createBridge() {
         push({ push: 'songs', songs: await songList() });
         push({ push: 'perform', text: `🗑 deleted “${song.title || song.name}” (recoverable in songs/.trash/)` });
       }
+      else if (m.pageReq === 'complete_riff') {
+        const { completeRiffAny } = await import('./llm.js');
+        const arr = await completeRiffAny({ riff: m.riff, style: m.style, tempo: m.tempo, key: m.key, hum: m.hum },
+          how => push({ push: 'riff', text: `🤖 ${how} — "${m.style || 'pop'}"… (a few minutes)` }));
+        // hum mode: the user's own mic take sings the melody wherever the
+        // arrangement placed its vocal statements (the page holds the audio)
+        const vocals = m.hum
+          ? (arr.vocalStartBeats.length ? arr.vocalStartBeats
+              : [arr.tracks[arr.leadTrack]?.startBeat ?? 0])
+            .map(sb => ({ source: 'studio', startBeat: sb, style: 'lead', vibrato: 1, notes: m.riff }))
+          : [];
+        push({ push: 'riff', text: `🎼 "${arr.title}" — starting…` });
+        const r = await send({ cmd: 'play_arrangement', title: arr.title, tempo: arr.tempo,
+          swing: arr.swing, tracks: arr.tracks, drums: arr.drums, vocals,
+          sheet: arr.leadTrack, pump: arr.pump, humanize: 0.45 });
+        push({ push: 'riff', text: `🤖 "${arr.title}" (${Math.round(r.seconds)}s) — ask Claude to save it if it's a keeper` });
+      }
     } catch (e) {
-      push({ push: 'perform', text: '⚠️ ' + e.message });
+      push({ push: m.pageReq === 'complete_riff' ? 'riff' : 'perform', text: '⚠️ ' + e.message });
     }
   };
 

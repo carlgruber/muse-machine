@@ -301,6 +301,7 @@
       <button id="btnStop" disabled>■ Stop</button>
       <button id="btnPractice" class="hot">🎯 Practice Mode</button>
       <button id="btnWaterfall">🌊 Waterfall</button>
+      <button id="btnRiff" class="hot" title="Play a few notes on the keyboard, then complete them as a full song in any style">🎸 Riff</button>
       <button id="btnCompose">🎲 Compose</button>
       <button id="btnMidiExport">⬇ MIDI</button>
       <button id="btnBandMidi" style="display:none" title="Export the last band performance as a multitrack MIDI file — one track per instrument, drums on channel 10">⬇ Band MIDI</button>
@@ -309,6 +310,14 @@
       <input type="range" id="tempoSlider" min="40" max="220" value="120" style="width:130px">
       <div class="hspacer"></div>
       <span id="sheetTitle"></span>
+    </div>
+    <div id="riffBar" class="row" style="display:none">
+      <b style="color:var(--cyan)">🎸 Riff captured</b>
+      <span id="riffInfo" style="font-size:12px;color:var(--dim)"></span>
+      <input id="riffStyle" placeholder="style or artist… (synthwave, lofi, country, Gambino, trap, orchestral…)"
+             style="flex:1;min-width:220px;background:#0e1224;color:var(--ink);border:1px solid #333a5e;border-radius:8px;padding:6px 10px;font-size:13px">
+      <button id="riffGo" title="Instant completion — music-theory engine, works offline">⚡ Instant</button>
+      <button id="riffAI" class="primary" title="Claude composes a full arrangement around your riff — runs on your Claude subscription via the MCP bridge (no API key needed)">🤖 Claude completes it</button>
     </div>
     <div id="sheetScroll"><svg id="sheet"></svg></div>
     <div id="stats"></div>
@@ -383,7 +392,12 @@
           <button id="btnTranscribe" disabled>🎼 Transcribe to Sheet</button>
           <button id="btnSongify" class="hot" disabled>🪄 Songify</button>
         </div>
-        <div style="font-size:11px;color:var(--dim)">Sing or hum a melody, then transcribe it — or hit <b>🪄 Songify</b>: it finds your key, writes chords, and the band plays your tune <i>with your own voice singing it</i>. Ask Claude for the full production, a remix, or to “finish my thought”.</div>
+        <div class="row" style="margin-top:6px">
+          <input id="humStyle" placeholder="style or artist… (lofi, synthwave, Gambino…)"
+                 style="flex:1;min-width:150px;background:#0e1224;color:var(--ink);border:1px solid #333a5e;border-radius:8px;padding:6px 10px;font-size:13px">
+          <button id="btnHumAI" class="hot" disabled title="Claude composes a full production around your hum, with your own voice singing it — runs on your Claude subscription via the MCP bridge">🤖 Produce my hum</button>
+        </div>
+        <div style="font-size:11px;color:var(--dim)">Sing or hum a melody, then transcribe it — or hit <b>🪄 Songify</b>: it finds your key, writes chords, and the band plays your tune <i>with your own voice singing it</i>. <b>🤖 Produce my hum</b> is the same idea, but Claude writes the whole production. Or ask Claude to remix, or to “finish my thought”.</div>
         <h2 style="margin-top:16px">🎯 Live Tuner</h2>
         <canvas id="tuner" width="290" height="110"></canvas>
       </div>
@@ -1389,7 +1403,7 @@ function noteOn(midi, source) {
     spawnKeyFX(midi, clr, 0.35);               // a tap is just a glimmer…
     const e = fxEmit(midi, clr, 4, 10, 160);   // …the fountain only starts if you HOLD
     if (e) fx.held.set(midi, e);
-    practiceHear(midi); wfHear(midi);
+    practiceHear(midi); wfHear(midi); riffHear(midi, true);
   }
 }
 
@@ -1401,6 +1415,7 @@ function noteOff(midi) {
     fx.held.get(midi).end = 0;
     fx.held.delete(midi);
   }
+  riffHear(midi, false);
 }
 
 function allNotesOff() {
@@ -1672,6 +1687,7 @@ function setStudioButtons() {
   document.getElementById('btnHarmonize').disabled = !hasRaw;
   document.getElementById('btnTranscribe').disabled = !hasRaw;
   document.getElementById('btnSongify').disabled = !hasRaw;
+  document.getElementById('btnHumAI').disabled = !hasRaw;
   document.getElementById('btnPlayRaw').disabled = !hasRaw;
   document.getElementById('btnDlRaw').disabled = !hasRaw;
   document.getElementById('btnPlayTuned').disabled = !tunedAudio;
@@ -2538,6 +2554,252 @@ function songifyRecording() {
   }).then(r => {
     $('procMsg').textContent = `🪄 Songified in ${keyName} — your voice first, the band answers. Ask Claude to remix it or “finish my thought”.`;
   }).catch(e => { $('procMsg').textContent = '🪄 ' + e.message; });
+}
+
+// ---------------- Riff → Song: play notes, name a style, get the song ----------------
+// Capture what the user plays on the keyboard (quantized to 8ths), infer the
+// key, develop the motif (repeat, diatonic sequence up a 3rd and a 5th, come
+// home), and arrange it with a style template. No AI required; asking Claude
+// for the deluxe cut still works because the riff lands on the sheet.
+const RIFF_D = {
+  FOUR: 'x...x...x...x...', BACK: '....x.......x...', H8: 'x.x.x.x.x.x.x.x.',
+  H16: 'xxxxxxxxxxxxxxxx', OFF8: '..x...x...x...x.',
+};
+const RIFF_STYLES = {
+  synthwave:  { tempo: 112, swing: 0.5,  pump: 0.3,  chordVoice: 'pad',     chordStyle: 'sustain', bassVoice: 'bass',   bassStyle: 'octave',    leadVoice: 'lead',    extraVoice: 'synthwave', extraStyle: 'arps8',
+                drums: { kick: RIFF_D.FOUR, snare: RIFF_D.BACK, hat: RIFF_D.H8, ride: RIFF_D.OFF8 } },
+  lofi:       { tempo: 74,  swing: 0.58, pump: 0,    chordVoice: 'epiano',  chordStyle: 'stabs',   bassVoice: 'bass',   bassStyle: 'sub',       leadVoice: 'kalimba', extraVoice: 'celeste',   extraStyle: 'sparkle',
+                drums: { kick: 'x.....x...x.....', snare: RIFF_D.BACK, hat: RIFF_D.H8 } },
+  country:    { tempo: 118, swing: 0.5,  pump: 0,    chordVoice: 'aguitar', chordStyle: 'strum8',  bassVoice: 'bass',   bassStyle: 'rootfifth', leadVoice: 'eguitar', extraVoice: null,
+                drums: { kick: 'x......x..x.....', snare: RIFF_D.BACK, hat: RIFF_D.H8 } },
+  soul:       { tempo: 96,  swing: 0.56, pump: 0.15, chordVoice: 'clav',    chordStyle: 'stabs',   bassVoice: 'sub808', bassStyle: 'funk',      leadVoice: 'wah',     extraVoice: 'choir',     extraStyle: 'sustain',
+                drums: { kick: 'x..x..x...x.....', snare: '....x.......x..x', hat: 'x.x.x.xxx.x.x.xx', conga: '..x..X....x..X..', shaker: RIFF_D.H8 } },
+  house:      { tempo: 124, swing: 0.5,  pump: 0.4,  chordVoice: 'piano',   chordStyle: 'pulse',   bassVoice: 'bass',   bassStyle: 'offbeat',   leadVoice: 'lead',    extraVoice: 'chip',      extraStyle: 'arps8',
+                drums: { kick: RIFF_D.FOUR, clap: RIFF_D.BACK, ride: RIFF_D.OFF8, shaker: RIFF_D.H16 } },
+  trap:       { tempo: 140, swing: 0.5,  pump: 0.2,  chordVoice: 'pad',     chordStyle: 'sustain', bassVoice: 'sub808', bassStyle: 'sub',       leadVoice: 'lead',    extraVoice: null,
+                drums: { kick: 'x.....x....x....', snare: '........x.......', hat: 'x.x.x.xxx.x.xxxx' } },
+  orchestral: { tempo: 100, swing: 0.5,  pump: 0,    chordVoice: 'strings', chordStyle: 'sustain', bassVoice: 'cello',  bassStyle: 'rootfifth', leadVoice: 'flute',   extraVoice: 'harp',      extraStyle: 'arps8',
+                drums: { kick: 'x.......x.......', ride: 'x...............' } },
+  pop:        { tempo: 116, swing: 0.5,  pump: 0.15, chordVoice: 'piano',   chordStyle: 'pulse',   bassVoice: 'bass',   bassStyle: 'octave',    leadVoice: 'lead',    extraVoice: 'glocken',   extraStyle: 'sparkle',
+                drums: { kick: RIFF_D.FOUR, snare: RIFF_D.BACK, clap: RIFF_D.BACK, hat: RIFF_D.H8 } },
+};
+const RIFF_KEYWORDS = [
+  [/synthwave|weeknd|80s|retro|neon|night/i, 'synthwave'],
+  [/lo-?fi|chill|study|sad|rain/i, 'lofi'],
+  [/country|nashville|folk|bryan|luke|tailgate/i, 'country'],
+  [/funk|gambino|soul|redbone|wah|prince|motown/i, 'soul'],
+  [/house|edm|club|festival|dance|daft|rave/i, 'house'],
+  [/trap|drake|kanye|hip.?hop|rap|808|metro/i, 'trap'],
+  [/orchestr|epic|cinema|fantasy|zelda|score|film|classical/i, 'orchestral'],
+];
+function riffStyleFor(text) {
+  for (const [re, k] of RIFF_KEYWORDS) if (re.test(text || '')) return k;
+  return 'pop';
+}
+
+// transpose a midi note by scale degrees within the inferred key
+function diaT(midi, key, steps) {
+  const pc = ((midi % 12) - key.tonic + 12) % 12;
+  let idx = 0, best = 99;
+  key.scale.forEach((s, i) => {
+    const d = Math.min(Math.abs(s - pc), 12 - Math.abs(s - pc));
+    if (d < best) { best = d; idx = i; }
+  });
+  const ni = idx + steps;
+  return midi + key.scale[((ni % 7) + 7) % 7] + 12 * Math.floor(ni / 7) - key.scale[idx];
+}
+// stack a triad upward from its root, starting around `base`
+function voiceTriad(tr, base) {
+  const out = [base + tr.pcs[0]];
+  for (const pc of tr.pcs.slice(1)) {
+    let n = base + pc;
+    while (n <= out[out.length - 1]) n += 12;
+    out.push(n);
+  }
+  return out;
+}
+
+let riffCap = null, riffNotes = null;
+
+function riffToggle() { riffCap ? riffDone() : riffStart(); }
+
+function riffStart() {
+  ensureAudio();
+  stopTune(); stopPractice();
+  riffCap = { t0: null, open: new Map(), notes: [] };
+  $('btnRiff').textContent = '⏹ Done';
+  $('riffBar').style.display = 'none';
+  $('stats').textContent = '🎸 recording — play your riff on the keyboard, then hit ⏹ Done';
+}
+
+function riffHear(midi, on) {
+  if (!riffCap) return;
+  const now = ctx.currentTime;
+  if (on) {
+    if (riffCap.t0 == null) riffCap.t0 = now;
+    riffCap.open.set(midi, now);
+    $('btnRiff').textContent = `⏹ Done (${riffCap.notes.length + riffCap.open.size})`;
+  } else {
+    const st = riffCap.open.get(midi);
+    if (st == null) return;
+    riffCap.open.delete(midi);
+    riffCap.notes.push({ midi, at: st - riffCap.t0, dur: now - st });
+  }
+}
+
+function riffDone() {
+  const cap = riffCap;
+  riffCap = null;
+  $('btnRiff').textContent = '🎸 Riff';
+  const now = ctx ? ctx.currentTime : 0;
+  for (const [m, st] of cap.open) cap.notes.push({ midi: m, at: st - cap.t0, dur: now - st });
+  if (cap.notes.length < 3) {
+    $('stats').textContent = '🎸 need at least 3 notes — hit 🎸 Riff and play a little melody';
+    return;
+  }
+  const tempo = +$('tempoSlider').value, spb = 60 / tempo;
+  const evs = cap.notes.sort((a, b) => a.at - b.at).slice(0, 64).map(n => ({
+    midi: n.midi,
+    atB: Math.round(n.at / spb * 2) / 2,                 // quantize starts to 8ths
+    durB: Math.max(0.5, Math.round(n.dur / spb * 2) / 2),
+  }));
+  const seq = [];
+  let cursor = 0;
+  for (const n of evs) {
+    if (n.atB > cursor + 0.001) seq.push({ rest: true, beats: +(n.atB - cursor).toFixed(2) });
+    const start = Math.max(n.atB, cursor);
+    if (start >= 16) break;                              // cap the riff at 4 bars
+    const beats = Math.min(n.durB, 16 - start);
+    seq.push({ pitch: n.midi, beats });
+    cursor = start + beats;
+  }
+  const total = seq.reduce((s, n) => s + n.beats, 0);
+  const pad = Math.ceil(total / 4) * 4 - total;
+  if (pad > 0.001) seq.push({ rest: true, beats: +pad.toFixed(2) });
+  riffNotes = seq;
+  loadAbcIntoEditor(trackToAbc({ notes: seq }, 'Captured Riff', tempo),
+    '🎸 riff captured — type a style below, then 🤖 Claude completes it (or ⚡ Instant)');
+  $('riffInfo').textContent = `${evs.length} notes · ${Math.ceil(Math.max(total, 1) / 4)} bar${total > 4 ? 's' : ''}`;
+  $('riffBar').style.display = 'flex';
+  $('riffStyle').focus();
+}
+
+async function completeRiff(styleText) {
+  if (!riffNotes) return;
+  const text = styleText ?? ($('riffStyle').value || 'pop');
+  const st = RIFF_STYLES[riffStyleFor(text)];
+  const riff = riffNotes;
+  const keyInfo = inferKeyAndChords({ meter: [4, 4],
+    events: riff.map(n => n.rest ? { rest: true, beats: n.beats } : { midi: n.pitch, beats: n.beats }) });
+  if (!keyInfo) { $('stats').textContent = '🎸 couldn’t make sense of that riff — try again'; return; }
+  const key = keyInfo.key;
+  const T = steps => riff.map(n => n.rest ? { ...n } : { ...n, pitch: diaT(n.pitch, key, steps) });
+  const riffBars = riff.reduce((s, n) => s + n.beats, 0) / 4;
+  const order = riffBars >= 2 ? [0, 2, 4, 0] : [0, 0, 2, 4, 0, 0];   // motif development plan
+  const lastPitch = [...riff].reverse().find(n => !n.rest).pitch;
+  let tonic = lastPitch - (((lastPitch % 12) - key.tonic + 12) % 12); // tonic at/below last note
+  const lead = [
+    { rest: true, beats: 8 },                            // 2-bar intro: band sets the scene
+    ...order.flatMap(s => T(s)),
+    { pitch: tonic, beats: 4 },                          // come home
+  ];
+  const full = inferKeyAndChords({ meter: [4, 4],
+    events: lead.map(n => n.rest ? { rest: true, beats: n.beats } : { midi: n.pitch, beats: n.beats }) });
+  const chords = full.chords, bars = full.totalBeats / 4;
+
+  const chordTrack = [], bassTrack = [], extraTrack = [];
+  for (let b = 0; b < bars; b++) {
+    const tr = chords[b], V = voiceTriad(tr, 48);
+    const root = 36 + tr.pcs[0], fifth = root + 7, hi = root + 12;
+    if (st.chordStyle === 'sustain')      chordTrack.push({ pitch: V, beats: 4, vel: 0.85 });
+    else if (st.chordStyle === 'stabs')   chordTrack.push({ pitch: V, beats: 1, vel: 0.9 }, { rest: true, beats: 1.5 }, { pitch: V, beats: 0.5, vel: 0.7 }, { rest: true, beats: 1 });
+    else if (st.chordStyle === 'strum8')  for (let i = 0; i < 8; i++) chordTrack.push({ pitch: V, beats: 0.5, vel: i % 2 ? 0.55 : 0.85 });
+    else                                  for (let i = 0; i < 4; i++) chordTrack.push({ pitch: V, beats: 1, vel: 0.9 });
+    if (st.bassStyle === 'octave')        for (let i = 0; i < 8; i++) bassTrack.push({ pitch: i % 2 ? hi : root, beats: 0.5, vel: 0.95 });
+    else if (st.bassStyle === 'offbeat')  for (let i = 0; i < 4; i++) bassTrack.push({ rest: true, beats: 0.5 }, { pitch: root, beats: 0.5, vel: 0.95 });
+    else if (st.bassStyle === 'rootfifth') bassTrack.push({ pitch: root, beats: 2, vel: 0.9 }, { pitch: fifth, beats: 2, vel: 0.8 });
+    else if (st.bassStyle === 'funk')     bassTrack.push({ pitch: root, beats: 0.75 }, { pitch: root, beats: 0.25, vel: 0.7 }, { rest: true, beats: 0.5 }, { pitch: root, beats: 0.5 }, { rest: true, beats: 0.25 }, { pitch: root, beats: 0.25, vel: 0.7 }, { pitch: hi, beats: 0.5 }, { pitch: root, beats: 1 });
+    else                                  bassTrack.push({ pitch: root, beats: 3 }, { rest: true, beats: 0.5 }, { pitch: root, beats: 0.5, vel: 0.8 });
+    if (st.extraVoice) {
+      const W = voiceTriad(tr, 60);
+      if (st.extraStyle === 'arps8')      for (const p of [W[0], W[1], W[2], W[0] + 12, W[2], W[1], W[0], W[2]]) extraTrack.push({ pitch: p, beats: 0.5, vel: 0.6 });
+      else if (st.extraStyle === 'sparkle') extraTrack.push({ pitch: 72 + tr.pcs[0], beats: 0.5, vel: 0.6 }, { rest: true, beats: 3.5 });
+      else                                extraTrack.push({ pitch: V.map(p => p + 12), beats: 4, vel: 0.7 });
+    }
+  }
+  const tracks = [
+    { name: 'Chords', voice: st.chordVoice, gain: st.chordStyle === 'sustain' ? 0.5 : 0.6, pan: -0.3, notes: chordTrack },
+    { name: 'Bass', voice: st.bassVoice, gain: 0.9, pan: 0, notes: bassTrack },
+  ];
+  if (st.extraVoice) tracks.push({ name: 'Color', voice: st.extraVoice, gain: 0.45, pan: 0.4, notes: extraTrack });
+  tracks.push({ name: '🎸 your riff', voice: st.leadVoice, gain: 0.9, pan: 0.1, notes: lead });
+  const r = await startArrangement({
+    title: `Your Riff — ${text}`, tempo: st.tempo, swing: st.swing, pump: st.pump, humanize: 0.45,
+    sheet: tracks.length - 1, tracks, drums: { steps: st.drums, gain: 0.9 },
+  });
+  $('stats').textContent = `🎸 completed as ${riffStyleFor(text)} (${Math.round(r.seconds)}s) — ask Claude for the deluxe cut, or to save it`;
+  return r;
+}
+
+// LLM tier: ship the riff to the bridge, where Claude composes a full
+// arrangement around it (mcp/llm.js). Status comes back as 'riff' pushes;
+// the performance arrives as a normal play_arrangement command.
+let riffLLMPending = null;
+// LLM progress is shown in both tabs: #stats (Sheet) and #procMsg (Studio)
+function llmStatus(text) {
+  $('stats').textContent = text;
+  $('procMsg').textContent = text;
+}
+// if the bridge never acknowledges, it's probably running pre-riff code
+function llmGuardStart() {
+  clearTimeout(riffLLMPending);
+  riffLLMPending = setTimeout(() => {
+    llmStatus('🤖 no answer from the bridge — it may be running older code; restart the MCP server (or Claude Code), or use ⚡ Instant / 🪄 Songify');
+  }, 8000);
+}
+function completeRiffLLM() {
+  if (!riffNotes) return;
+  if (!mcpWs || mcpWs.readyState !== 1) {
+    $('stats').textContent = '🤖 needs the Claude bridge — start the MCP server (see README), or use ⚡ Instant';
+    return;
+  }
+  ensureAudio();
+  llmGuardStart();
+  const keyInfo = inferKeyAndChords({ meter: [4, 4],
+    events: riffNotes.map(n => n.rest ? { rest: true, beats: n.beats } : { midi: n.pitch, beats: n.beats }) });
+  mcpWs.send(JSON.stringify({
+    pageReq: 'complete_riff',
+    riff: riffNotes,
+    style: $('riffStyle').value || 'pop',
+    tempo: +$('tempoSlider').value,
+    key: keyInfo ? { tonicPitchClass: keyInfo.key.tonic, mode: keyInfo.key.mode } : undefined,
+  }));
+  $('stats').textContent = '🤖 riff sent — Claude is composing… (a few minutes; the band starts on its own)';
+}
+
+// Hum → full LLM production: transcribe the Studio take, ship the melody to
+// the bridge, and the arrangement comes back with YOUR VOICE singing it
+// (source:'studio' vocals at the beats Claude chose).
+function produceHumLLM() {
+  if (!rawAudio || !rawAudio.length) return;
+  if (!mcpWs || mcpWs.readyState !== 1) {
+    $('procMsg').textContent = '🤖 needs the Claude bridge — start the MCP server (see README), or use 🪄 Songify';
+    return;
+  }
+  ensureAudio();
+  transcribeToSheet();
+  const info = inferKeyAndChords(currentTune);
+  if (!info) { $('procMsg').textContent = '🤖 couldn’t hear a melody — hum louder, closer to the mic'; return; }
+  const melody = currentTune.events.filter(e => !e.bar)
+    .map(e => e.rest ? { rest: true, beats: e.beats } : { pitch: e.midi, beats: e.beats });
+  llmGuardStart();
+  mcpWs.send(JSON.stringify({
+    pageReq: 'complete_riff', hum: true, riff: melody,
+    style: $('humStyle').value || 'pop',
+    tempo: +$('tempoSlider').value,
+    key: { tonicPitchClass: info.key.tonic, mode: info.key.mode },
+  }));
+  llmStatus('🤖 hum sent — Claude is producing… (a few minutes; your voice sings the hook)');
 }
 
 // ---------------- Waterfall play-along (falling-notes mode) ----------------
@@ -3469,6 +3731,8 @@ async function connectMidi(linkEl) {
 // wiring for the new toys
 $('btnTranscribe').onclick = transcribeToSheet;
 $('btnSongify').onclick = songifyRecording;
+$('btnHumAI').onclick = produceHumLLM;
+$('humStyle').addEventListener('keydown', e => { if (e.key === 'Enter') produceHumLLM(); });
 $('btnCompose').onclick = composeTune;
 $('btnHarmonize').onclick = runHarmonize;
 $('btnMidiExport').onclick = () => download(tuneToMidiBlob(), (currentTune.title || 'muse-tune').replace(/[^\w -]+/g, '') + '.mid');
@@ -3924,7 +4188,7 @@ function melodizeBuffer(input, sr, notes, tempo = 90, vib = 1) {
 // this page connects to it and executes play commands with the real synth.
 let mcpWs = null, mcpBus = null, vocalSrcs = [];
 
-const PAGE_VERSION = '2026-07-10.3';
+const PAGE_VERSION = '2026-07-11.3';
 
 // ---- audio unlock banner: autoplay policy blocks sound until a click ----
 // When a bridge command arrives before any user gesture, remember it, show
@@ -4216,6 +4480,10 @@ function handleMcpPush(msg) {
     $('sbInfo').textContent = sbSongs.length ? sbSongs.length + ' saved' : 'no saved songs yet';
   } else if (msg.push === 'perform') {
     $('sbInfo').textContent = msg.text;
+  } else if (msg.push === 'riff') {
+    clearTimeout(riffLLMPending);
+    riffLLMPending = null;
+    llmStatus(msg.text);
   }
 }
 $('sbPlay').onclick = () => {
@@ -4238,6 +4506,14 @@ $('btnPlay').onclick = playTune;
 $('btnStop').onclick = stopTune;
 $('btnPractice').onclick = () => practice ? stopPractice() : startPractice();
 $('btnWaterfall').onclick = startWaterfall;
+$('btnRiff').onclick = riffToggle;
+$('riffGo').onclick = () => completeRiff();
+$('riffAI').onclick = completeRiffLLM;
+$('riffStyle').addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  // Enter = the good one when Claude is reachable, instant otherwise
+  (mcpWs && mcpWs.readyState === 1) ? completeRiffLLM() : completeRiff();
+});
 $('tempoSlider').oninput = e => { $('tempoVal').textContent = e.target.value; };
 
 // studio
@@ -4273,6 +4549,7 @@ window.__muse = { parseTune, yinPitch, autotuneBuffer, snapFreq, snapMidi, scale
                   renderArrangementToWav, sheetSnapshot,
                   startWaterfall, stopWaterfall, wfHear: m => wfHear(m), wfFrame: () => wf && wfFrame(), wfState: () => wf,
                   songifyRecording, inferKeyAndChords,
+                  completeRiff, setRiff: seq => { riffNotes = seq; }, riffStyleFor,
                   spawnKeyFX, fxState: () => fx && { parts: fx.parts.length, running: fx.running },
                   fxTick: t => fx && fxLoop(t ?? performance.now()),
                   musicXmlToAbc, midiToAbc, unzipFirstXml, handleSheetFile,
