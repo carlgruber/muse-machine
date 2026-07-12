@@ -31,83 +31,155 @@ const NOTE = {
       properties: { rest: { const: true }, beats: { type: 'number' } } },
   ],
 };
+// The model writes a SONG PLAN — each section once, plus a play order — and
+// expandPlan() unrolls the repeats. Small JSON (fast to generate), full-length
+// song when performed.
+const DRUM_STEPS = {
+  type: 'object', additionalProperties: false,
+  properties: Object.fromEntries(LANES.map(l => [l, { type: 'string' }])),
+};
 export const ARRANGEMENT_SCHEMA = {
   type: 'object', additionalProperties: false,
-  required: ['title', 'tempo', 'tracks', 'drums', 'leadTrack'],
+  required: ['title', 'tempo', 'sections', 'order', 'leadTrack'],
   properties: {
     title: { type: 'string' },
     tempo: { type: 'number' },
     swing: { type: 'number' },
     pump: { type: 'number' },
-    leadTrack: { type: 'integer' },
-    vocalStartBeats: { type: 'array', items: { type: 'number' } },
-    tracks: {
+    leadTrack: { type: 'string' },
+    order: { type: 'array', items: { type: 'string' } },
+    sections: {
       type: 'array',
       items: {
         type: 'object', additionalProperties: false,
-        required: ['name', 'voice', 'notes'],
+        required: ['name', 'bars', 'tracks'],
         properties: {
           name: { type: 'string' },
-          voice: { type: 'string', enum: VOICE_LIST },
-          gain: { type: 'number' },
-          pan: { type: 'number' },
-          startBeat: { type: 'number' },
-          notes: { type: 'array', items: NOTE },
+          bars: { type: 'integer' },
+          vocal: { type: 'boolean' },
+          tracks: {
+            type: 'array',
+            items: {
+              type: 'object', additionalProperties: false,
+              required: ['name', 'notes'],
+              properties: {
+                name: { type: 'string' },
+                voice: { type: 'string', enum: VOICE_LIST },
+                gain: { type: 'number' },
+                pan: { type: 'number' },
+                notes: { type: 'array', items: NOTE },
+              },
+            },
+          },
+          drums: {
+            type: 'object', additionalProperties: false, required: ['steps'],
+            properties: { steps: DRUM_STEPS },
+          },
         },
       },
     },
-    drums: {
-      type: 'object', additionalProperties: false, required: ['steps'],
-      properties: {
-        gain: { type: 'number' },
-        steps: {
-          type: 'object', additionalProperties: false,
-          properties: Object.fromEntries(LANES.map(l => [l, { type: 'string' }])),
-        },
-      },
-    },
+    drumGain: { type: 'number' },
   },
 };
 
+// Unroll the plan: concatenate sections per `order`, matching tracks across
+// sections by name (voice/gain/pan from first appearance), padding absent
+// tracks and lanes with silence. Returns the flat play_arrangement shape.
+const MAX_PERFORMED_BARS = 72;
+export function expandPlan(plan) {
+  if (!plan.sections) return plan;                        // already flat
+  const byName = new Map(plan.sections.map(s => [s.name, s]));
+  const order = (plan.order || []).map(n => byName.get(n)).filter(Boolean);
+  const seq = order.length ? order : plan.sections;
+  const reg = new Map();                                  // track name -> global track
+  const lanes = new Set(seq.flatMap(s => Object.keys(s.drums?.steps || {})));
+  const laneAcc = Object.fromEntries([...lanes].map(l => [l, '']));
+  const vocalStartBeats = [];
+  let cursor = 0;                                         // beats so far
+  const padTo = (g, beats) => {
+    if (beats > g.filled + 1e-6) { g.notes.push({ rest: true, beats: +(beats - g.filled).toFixed(3) }); g.filled = beats; }
+  };
+  for (const sec of seq) {
+    const bars = Math.min(16, Math.max(1, Math.round(sec.bars || 4)));
+    if (cursor / 4 + bars > MAX_PERFORMED_BARS) break;
+    const secBeats = bars * 4;
+    if (sec.vocal) vocalStartBeats.push(cursor);
+    for (const t of sec.tracks || []) {
+      let g = reg.get(t.name);
+      if (!g) { g = { name: t.name, voice: t.voice, gain: t.gain, pan: t.pan, notes: [], filled: 0 }; reg.set(t.name, g); }
+      else { g.voice ??= t.voice; g.gain ??= t.gain; g.pan ??= t.pan; }
+      padTo(g, cursor);
+      let used = 0;
+      for (const n of t.notes || []) {
+        if (!n || !(n.beats > 0) || used >= secBeats - 1e-6) continue;
+        const b = Math.min(n.beats, secBeats - used);
+        g.notes.push({ ...n, beats: b });
+        used += b;
+      }
+      g.filled = cursor + used;
+    }
+    for (const l of lanes) {
+      const s = String(sec.drums?.steps?.[l] || '');
+      laneAcc[l] += s.slice(0, bars * 16).padEnd(bars * 16, '.');
+    }
+    cursor += secBeats;
+  }
+  const tracks = [...reg.values()];
+  for (const g of tracks) { padTo(g, cursor); delete g.filled; }
+  const leadIdx = tracks.findIndex(t => t.name === plan.leadTrack);
+  return {
+    title: plan.title, tempo: plan.tempo, swing: plan.swing, pump: plan.pump,
+    tracks,
+    drums: { gain: plan.drumGain, steps: laneAcc },
+    leadTrack: leadIdx >= 0 ? leadIdx
+      : Math.max(0, tracks.findIndex(t => /riff|lead|melody/i.test(t.name))),
+    vocalStartBeats,
+  };
+}
+
 export const SYSTEM = `You are the resident composer inside Muse Machine, a browser band that performs
 multitrack arrangements live. The user played a short riff on the piano and typed a style or
-artist. Compose a complete song built around their riff and return it as JSON.
+artist. Compose a COMPLETE SONG built around their riff and return it as JSON.
 
-Arrangement semantics (4/4 time; durations in beats, quarter note = 1):
-- tracks: 4–7 tracks. Each has name, voice, gain 0–1 (bass ~0.9, chords ~0.5, colors ~0.4),
-  pan -1..1 (spread the band), optional startBeat (beats of silence before the track enters),
-  and notes: a sequence of {pitch, beats, vel 0–1} or {rest: true, beats}.
-- pitch is a MIDI number, a note name like "G3", or an array of either for a chord.
-  Keep bass 28–48, chords/comping 48–67, lead/melody 55–86.
-- drums.steps: per-lane 16th-note step strings over lanes kick/snare/hat/clap/ride/conga/
-  shaker/tamb. 16 characters per bar; "." = silent, "x" = hit, "X" = accent. Every lane you
-  include MUST be exactly the same length: 16 × (total bars of the song). Through-compose the
-  groove — vary it per section (sparser intro, fills into the chorus, denser peak, clean ending).
-- swing 0.5 (straight) to 0.66 (heavy); pump 0–0.35 adds sidechain ducking (EDM/synthwave);
-  leadTrack is the index of the melody track to render on the sheet-music display.
+You write a song plan: each section ONCE, then an order that repeats them. The engine
+unrolls the repeats, so a compact plan performs as a full-length song. Write it like a
+songwriter: verse/chorus contrast, a bridge or breakdown, an ending.
+
+Section semantics (4/4 time; durations in beats, quarter note = 1):
+- sections: 3–5 distinct sections (e.g. intro, verse, chorus, bridge, outro), each 4–8
+  bars. Each section has its own tracks and drums covering exactly bars × 4 beats
+  (pad with rests). A track absent from a section is silent there.
+- order: 8–12 section names, e.g. ["intro","verse","chorus","verse","chorus","bridge",
+  "chorus","chorus","outro"]. Total performed length 40–64 bars (about 2–3 minutes) —
+  repeats are free, so use them: this is the song the user hears, give it a real shape
+  and a real ending (final section resolves to the tonic; don't stop mid-phrase).
+- tracks match ACROSS sections by exact name; give voice/gain/pan on a track's first
+  appearance (gain 0–1: bass ~0.9, chords ~0.5, colors ~0.4; pan -1..1 to spread the
+  band). Use 4–7 distinct track names across the whole song.
+- notes: {pitch, beats, vel 0–1} or {rest: true, beats}. pitch is a MIDI number, a note
+  name like "G3", or an array of either for a chord. Bass 28–48, chords 48–67, lead 55–86.
+- drums.steps: per-lane 16th-note step strings, lanes kick/snare/hat/clap/ride/conga/
+  shaker/tamb; 16 chars per bar, exactly bars × 16 per section; "."=silent, "x"=hit,
+  "X"=accent. Vary the groove per section (sparse intro, fills, denser chorus).
+- swing 0.5 (straight) to 0.66 (heavy); pump 0–0.35 adds sidechain ducking;
+  leadTrack is the NAME of the melody track to show on the sheet-music display.
 
 Composition requirements:
-- 16–24 bars total, with a real arc: short intro → riff stated plainly → development
-  (diatonic transpositions, octave answers, call-and-response) → a bigger chorus/peak
-  section → final riff statement → clean ending resolving to the tonic.
-- Keep the JSON economical (it is performed, not read): minified, omit vel except for
-  accents, prefer sustained notes and startBeat over long runs of rests, at most ~300
-  note events across all tracks. Density should come from the drums, not the JSON.
-- The user's riff is sacred: one track's name must contain "riff" and must state the riff
-  recognizably at least twice (its exact intervals and rhythm), plus developed variants.
-  Honor the key implied by the riff.
-- Every track's notes must fill the full song length (use rests) so the parts line up.
-- Be idiomatic for the requested style — voice choices, tempo, groove, harmonic color,
-  bass behavior. If an artist is named, channel their production style.
-- Total duration should land between 40 and 75 seconds at your chosen tempo.
+- The user's riff is sacred: one track's name must contain "riff"; state the riff
+  recognizably (exact intervals and rhythm) in at least two sections, and develop it
+  elsewhere (diatonic transposition, octave answers, call-and-response). Honor the
+  key the riff implies.
+- Keep the JSON economical: minified, omit vel except accents, prefer sustained notes,
+  at most ~250 note events across all sections. Density comes from drums and repeats.
+- Be idiomatic for the requested style — voices, tempo, groove, harmonic color, bass
+  behavior. If an artist is named, channel their production style.
 
 Hum mode (input.isHum true): the melody was hummed into a microphone, and the band will
-re-sing it with the user's ACTUAL VOICE, pitch-forced onto the melody. Return
-vocalStartBeats: 2–3 beat offsets where the vocal states the user's exact melody (its
-full riffTotalBeats each time) — typically the first statement and the final one. Around
-those beats, arrange like a producer behind a singer: keep the lead track sparse or
-doubling softly there (save its runs for the gaps between vocal statements), and leave
-headroom in the mix. Statements must not overlap.`;
+re-sing it with the user's ACTUAL VOICE, pitch-forced onto the melody, in every section
+where you set vocal: true. Mark vocal: true on the sections where the melody is sung —
+the chorus, typically, so the voice returns 2–3 times across the order. A vocal section
+must be at least riffTotalBeats/4 bars long, and its instrumental tracks should back the
+singer (sparse lead or soft doubling there; save the runs for non-vocal sections).`;
 
 // Light sanitation: the schema guarantees shape; this guards musical/engine limits.
 export function sanitize(arr) {
@@ -225,7 +297,7 @@ export async function cliCompleteRiff(input, onStatus) {
   const text = String(wrap.result || '');
   const first = text.indexOf('{'), last = text.lastIndexOf('}');
   if (first < 0 || last <= first) throw new Error('the model returned no arrangement JSON');
-  return sanitize(JSON.parse(text.slice(first, last + 1)));
+  return sanitize(expandPlan(JSON.parse(text.slice(first, last + 1))));
 }
 
 export async function llmCompleteRiff(input, onStatus) {
@@ -245,7 +317,7 @@ export async function llmCompleteRiff(input, onStatus) {
     if (msg.stop_reason === 'refusal') throw new Error('the model declined this request');
     const text = msg.content.find(b => b.type === 'text');
     if (!text) throw new Error('the model returned no arrangement');
-    return sanitize(JSON.parse(text.text));
+    return sanitize(expandPlan(JSON.parse(text.text)));
   } catch (e) {
     if (e.status === 401 || /resolve authentication/i.test(e.message || ''))
       throw new Error('no Anthropic API key — add "env": {"ANTHROPIC_API_KEY": "sk-ant-…"} to '
