@@ -1,6 +1,7 @@
 # local junk
 .DS_Store
 *.log
+songs/.trash/
 
 # local dev config (Claude Code session settings, launch config)
 .claude/

@@ -252,6 +252,7 @@
         <option value="nylon">Nylon Classical</option>
         <option value="eguitar">Electric Clean</option>
         <option value="overdrive">Overdrive</option>
+        <option value="wah">Wah Funk</option>
         <option value="harp">Concert Harp</option>
       </optgroup>
       <optgroup label="Winds & Brass">
@@ -266,11 +267,13 @@
         <option value="strings">Nebula Strings</option>
         <option value="pad">Aurora Pad</option>
         <option value="cello">Cello</option>
+        <option value="choir">Gospel Choir</option>
       </optgroup>
       <optgroup label="Synths">
         <option value="lead">Neon Lead</option>
         <option value="synthwave">Synthwave</option>
         <option value="bass">Deep Bass</option>
+        <option value="sub808">808 Sub</option>
         <option value="chip">8-Bit Chip</option>
         <option value="wobble">Wobble Bass</option>
       </optgroup>
@@ -335,6 +338,7 @@
         <select id="sbSel"></select>
         <button id="sbPlay" class="primary">▶ Perform</button>
         <button id="sbStop">■ Stop</button>
+        <button id="sbDel" title="Delete this song (recoverable from songs/.trash/)">🗑</button>
         <span id="sbInfo">no saved songs yet</span>
       </div>
     </div>
@@ -567,6 +571,11 @@ const PRESETS = {
   bass:     { oscs:[{t:'square',r:.5,g:.4},{t:'sawtooth',r:1,g:.25}], a:.01, d:.3, s:.5, rel:.15, filt:4 },
   chip:     { oscs:[{t:'square',r:1,g:.3},{t:'square',r:2,g:.08}], a:.002, d:.15, s:.5, rel:.05, filt:10 },
   wobble:   { oscs:[{t:'square',r:.5,g:.32},{t:'sawtooth',r:1.01,g:.25}], a:.02, d:.3, s:.75, rel:.25, filt:3.2, trem:{rate:3.2,depth:.55} },
+  // Soul & hip-hop expansion
+  sub808:   { oscs:[{t:'sine',r:1,g:.95},{t:'sine',r:2,g:.07}], a:.005, d:1.8, s:.35, rel:.25, filt:2.5, bend:{from:2.8,t:.05}, drive:2.2 },
+  choir:    { oscs:[{t:'sawtooth',r:1,g:.3},{t:'sawtooth',r:1.007,g:.3},{t:'sawtooth',r:.5,g:.12}], a:.5, d:.6, s:.85, rel:.9, filt:6, vib:.8,
+              formants:[[730,8,1],[1090,10,.55],[2440,12,.28]] },
+  wah:      { ks:{bright:.65, decay:.9982, pick:.12}, filt:7, rel:.12, wah:{from:350,to:2100,t:.22,q:5} },
 };
 let currentVoice = 'piano';
 
@@ -643,7 +652,18 @@ function synthNoteOn(midi, when, vel = 1, dest, voiceId) {
     filt.type = 'lowpass';
     filt.frequency.value = Math.min(f * p.filt, 14000);
     filt.Q.value = 0.7;
-    node.connect(out); out.connect(filt); filt.connect(dest || instBus);
+    node.connect(out); out.connect(filt);
+    if (p.wah) {                              // auto-wah: bandpass swept on each pluck
+      const bp = ctx.createBiquadFilter();
+      bp.type = 'bandpass'; bp.Q.value = p.wah.q;
+      bp.frequency.setValueAtTime(p.wah.from, t);
+      bp.frequency.exponentialRampToValueAtTime(p.wah.to, t + p.wah.t);
+      bp.frequency.exponentialRampToValueAtTime(p.wah.from * 1.6, t + p.wah.t * 2.6);
+      const makeupW = ctx.createGain(); makeupW.gain.value = 2.2;
+      filt.connect(bp); bp.connect(makeupW); makeupW.connect(dest || instBus);
+    } else {
+      filt.connect(dest || instBus);
+    }
     src.start(t);
     src.stop(t + (p.ks.dist ? 4 : 3));
     let done = false;
@@ -665,7 +685,24 @@ function synthNoteOn(midi, when, vel = 1, dest, voiceId) {
   filt.type = 'lowpass';
   filt.frequency.value = Math.min(f * p.filt, 14000);
   filt.Q.value = 0.7;
-  out.connect(filt); filt.connect(dest || instBus);
+  if (p.formants) {                            // vowel color: parallel bandpass formants
+    const sum = ctx.createGain(); sum.gain.value = 3.2;
+    for (const [ff, q, fg] of p.formants) {
+      const bp = ctx.createBiquadFilter();
+      bp.type = 'bandpass'; bp.frequency.value = ff; bp.Q.value = q;
+      const bg = ctx.createGain(); bg.gain.value = fg;
+      out.connect(bp); bp.connect(bg); bg.connect(sum);
+    }
+    sum.connect(filt);
+  } else if (p.drive) {                        // saturation (the 808 thump)
+    const pre = ctx.createGain(); pre.gain.value = p.drive;
+    const ws = ctx.createWaveShaper();
+    ws.curve = getDistCurve(); ws.oversample = '2x';
+    out.connect(pre); pre.connect(ws); ws.connect(filt);
+  } else {
+    out.connect(filt);
+  }
+  filt.connect(dest || instBus);
 
   const peak = 0.28 * vel;
   out.gain.setValueAtTime(0.0001, t);
@@ -2208,7 +2245,10 @@ async function runHarmonize() {
 }
 
 // ---------------- Beat Lab: 16-step drum machine ----------------
-const BL_ROWS = [['kick', '🦶 kick'], ['snare', '🥁 snare'], ['hat', '🎩 hat'], ['clap', '👏 clap'], ['ride', '🔔 open']];
+const BL_ROWS = [['kick', '🦶 kick'], ['snare', '🥁 snare'], ['hat', '🎩 hat'], ['clap', '👏 clap'], ['ride', '🔔 open'],
+                 ['conga', '🪘 conga'], ['shaker', '🧂 shaker'], ['tamb', '🎊 tamb']];
+// presets predate the percussion rows — pad any missing lanes with silence
+const blFromPreset = p => BL_ROWS.map((_, i) => p[i] ? [...p[i]] : new Array(16).fill(0));
 // rows: kick / snare / closed hat / clap / open hat. BL_SWING delays the
 // off-16ths (0.5 = straight, 0.67 = full triplet shuffle).
 const BL_PRESETS = {
@@ -2223,7 +2263,7 @@ const BL_PRESETS = {
   clear:   [new Array(16).fill(0), new Array(16).fill(0), new Array(16).fill(0), new Array(16).fill(0), new Array(16).fill(0)],
 };
 const BL_SWING = { boombap: 0.56, funk: 0.57, shuffle: 0.63 };
-let blPattern = BL_PRESETS.rock.map(r => [...r]);
+let blPattern = blFromPreset(BL_PRESETS.rock);
 let blSwing = 0.5;
 let blState = null;
 
@@ -2300,6 +2340,55 @@ function drumHit(kind, t, dest, lvl = 1) {
     g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
     src.connect(hp); hp.connect(g); g.connect(bus);
     src.start(t); src.stop(t + 0.32);
+  } else if (kind === 'conga') {
+    // pitched hand drum; accent (X) plays the higher drum, slap-style
+    const f0 = lvl > 1 ? 300 : 215;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(f0 * 1.12, t);
+    o.frequency.exponentialRampToValueAtTime(f0, t + 0.03);
+    g.gain.setValueAtTime(0.34, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+    o.connect(g); g.connect(bus);
+    o.start(t); o.stop(t + 0.18);
+    const src = ctx.createBufferSource();          // skin tap
+    src.buffer = getNoiseBuffer(); src.loop = true;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass'; bp.frequency.value = 2400; bp.Q.value = 1.2;
+    const ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.1, t);
+    ng.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+    src.connect(bp); bp.connect(ng); ng.connect(bus);
+    src.start(t); src.stop(t + 0.03);
+  } else if (kind === 'shaker') {
+    const src = ctx.createBufferSource();
+    src.buffer = getNoiseBuffer(); src.loop = true;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass'; bp.frequency.value = 5600; bp.Q.value = 1.4;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.14 * lvl, t + 0.012);   // soft attack = shh, not tss
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+    src.connect(bp); bp.connect(g); g.connect(bus);
+    src.start(t); src.stop(t + 0.1);
+  } else if (kind === 'tamb') {
+    for (const [dt, lv2] of [[0, 0.14], [0.024, 0.09]]) {    // double jingle
+      const src = ctx.createBufferSource();
+      src.buffer = getNoiseBuffer(); src.loop = true;
+      const hp = ctx.createBiquadFilter();
+      hp.type = 'highpass'; hp.frequency.value = 7600;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(lv2 * lvl, t + dt);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dt + 0.11);
+      src.connect(hp); hp.connect(g); g.connect(bus);
+      src.start(t + dt); src.stop(t + dt + 0.12);
+      const o = ctx.createOscillator(), og = ctx.createGain(); // metallic ping
+      o.type = 'square'; o.frequency.value = dt ? 6100 : 5200;
+      og.gain.setValueAtTime(0.02 * lvl, t + dt);
+      og.gain.exponentialRampToValueAtTime(0.001, t + dt + 0.06);
+      o.connect(og); og.connect(bus);
+      o.start(t + dt); o.stop(t + dt + 0.07);
+    }
   } else { // hat
     const src = ctx.createBufferSource();
     src.buffer = getNoiseBuffer(); src.loop = true;
@@ -2632,7 +2721,7 @@ function wfFrame() {
 // the MCP 'play_arrangement' command; shows a live "Now Performing" HUD.
 let arrState = null;
 let lastArrangement = null;                     // most recent band, for MIDI export
-const ARR_LANES = ['kick', 'snare', 'hat', 'clap', 'ride'];
+const ARR_LANES = ['kick', 'snare', 'hat', 'clap', 'ride', 'conga', 'shaker', 'tamb'];
 // fallback palette for rows without an instrument (vocals, drums)
 const ARR_COLORS = ['#4ee1c8', '#e14e9e', '#f0c05a', '#7aa2ff', '#9df05a',
                     '#ff8a5c', '#c58aff', '#5ce1ff', '#ffd45c', '#ff5c7a', '#8affc1', '#ff9de1'];
@@ -2649,6 +2738,7 @@ const VOICE_COLORS = {
   flute: '#8fd4ff', brass: '#ffab3d', theremin: '#c77dff', clarinet: '#79c9a5', oboe: '#c9bb55',
   trumpet: '#ffc93d', strings: '#ff8a70', pad: '#8f86ff', cello: '#d96a52',
   lead: '#ff4f6e', synthwave: '#e04fff', bass: '#4f6bff', chip: '#7cff4f', wobble: '#9d4bff',
+  sub808: '#2f3fd9', choir: '#ffe9c9', wah: '#a8e04a',
 };
 const voiceColor = v => VOICE_COLORS[v] || '#4ee1c8';
 
@@ -2944,7 +3034,7 @@ async function startArrangement(msg) {
     if (d.steps) {
       for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]);
     } else if (BL_PRESETS[d.pattern]) {
-      BL_ROWS.forEach(([kind], ri) => { lanes[kind] = BL_PRESETS[d.pattern][ri]; });
+      BL_PRESETS[d.pattern].forEach((row, ri) => { lanes[BL_ROWS[ri][0]] = row; });
     }
     const dswing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || swing));
     const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
@@ -3095,8 +3185,9 @@ const GM_PROGRAM = {
   aguitar: 25, nylon: 24, eguitar: 27, overdrive: 29, harp: 46, flute: 73,
   brass: 61, theremin: 80, clarinet: 71, oboe: 68, trumpet: 56, strings: 48,
   pad: 89, cello: 42, lead: 81, synthwave: 62, bass: 38, chip: 80, wobble: 39,
+  sub808: 87, choir: 52, wah: 26,
 };
-const GM_DRUM = { kick: 36, snare: 38, hat: 42, clap: 39, ride: 46 };
+const GM_DRUM = { kick: 36, snare: 38, hat: 42, clap: 39, ride: 46, conga: 63, shaker: 70, tamb: 54 };
 
 function arrangementToMidiBlob(arr) {
   const tempo = Math.max(40, Math.min(240, arr.tempo || 100));
@@ -3166,7 +3257,7 @@ function arrangementToMidiBlob(arr) {
     const d = arr.drums;
     const lanes = {};
     if (d.steps) { for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]); }
-    else if (BL_PRESETS[d.pattern]) BL_ROWS.forEach(([kind], ri) => { lanes[kind] = BL_PRESETS[d.pattern][ri]; });
+    else if (BL_PRESETS[d.pattern]) BL_PRESETS[d.pattern].forEach((row, ri) => { lanes[BL_ROWS[ri][0]] = row; });
     const swing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || arr.swing || 0.5));
     const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
     const dStart = Math.max(0, d.startBeat || 0);
@@ -3283,7 +3374,7 @@ async function renderArrangementToWav(arr) {
       const d = arr.drums;
       const lanes = {};
       if (d.steps) { for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]); }
-      else if (BL_PRESETS[d.pattern]) BL_ROWS.forEach(([kind], ri) => { lanes[kind] = BL_PRESETS[d.pattern][ri]; });
+      else if (BL_PRESETS[d.pattern]) BL_PRESETS[d.pattern].forEach((row, ri) => { lanes[BL_ROWS[ri][0]] = row; });
       const dswing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || arr.swing || 0.5));
       const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
       const dg = ctx.createGain();
@@ -3401,7 +3492,7 @@ $('btnBandWav').onclick = async () => {
 };
 $('blPlay').onclick = blToggle;
 $('blPreset').onchange = e => {
-  blPattern = BL_PRESETS[e.target.value].map(r => [...r]);
+  blPattern = blFromPreset(BL_PRESETS[e.target.value]);
   blSwing = BL_SWING[e.target.value] || 0.5;
   blBuild();
 };
@@ -3833,7 +3924,7 @@ function melodizeBuffer(input, sr, notes, tempo = 90, vib = 1) {
 // this page connects to it and executes play commands with the real synth.
 let mcpWs = null, mcpBus = null, vocalSrcs = [];
 
-const PAGE_VERSION = '2026-07-08.11';
+const PAGE_VERSION = '2026-07-10.3';
 
 // ---- audio unlock banner: autoplay policy blocks sound until a click ----
 // When a bridge command arrives before any user gesture, remember it, show
@@ -4020,7 +4111,7 @@ async function handleMcpCommand(msg) {
     case 'drum': {
       if (msg.pattern === 'off') { if (blState) blToggle(); return { groove: 'off' }; }
       if (!BL_PRESETS[msg.pattern]) throw new Error('unknown pattern; use rock, boombap, house, funk, disco, trap, bossa, shuffle, or off');
-      blPattern = BL_PRESETS[msg.pattern].map(r => [...r]);
+      blPattern = blFromPreset(BL_PRESETS[msg.pattern]);
       blSwing = BL_SWING[msg.pattern] || 0.5;
       blBuild();
       if (msg.bpm) { $('tempoSlider').value = Math.max(40, Math.min(220, msg.bpm)); $('tempoVal').textContent = $('tempoSlider').value; }
@@ -4134,6 +4225,13 @@ $('sbPlay').onclick = () => {
 };
 $('sbStop').onclick = () => {
   if (mcpWs) mcpWs.send(JSON.stringify({ pageReq: 'stop_song' }));
+};
+$('sbDel').onclick = () => {
+  const name = $('sbSel').value;
+  if (!mcpWs || !name) return;
+  const title = (sbSongs.find(s => s.name === name) || {}).title || name;
+  if (confirm(`Delete “${title}” from the Songbook?\n(It moves to songs/.trash/ — recoverable by hand.)`))
+    mcpWs.send(JSON.stringify({ pageReq: 'delete_song', name }));
 };
 
 $('btnPlay').onclick = playTune;

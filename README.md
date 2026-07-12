@@ -73,9 +73,9 @@ Settings → Connectors → Add custom connector → `https://localhost:8790/mcp
 Claude's `play_arrangement` tool performs as a **full band on one sample-accurate clock**: up to 12 melodic/chordal tracks (each with its own synth voice, gain, stereo pan, and entry beat), a step-programmable drum kit, and vocal lines dropped into the mix at exact beats.
 
 - **Chords** are pitch arrays; `startBeat` writes intros, builds, and drops.
-- **Drums** take preset grooves (`rock`, `trap`, `house`, `funk`, `disco`, `boombap`, `bossa`, `shuffle`) or custom per-lane step strings — `kick: "x..x....x..x...."`, `X` = accent — of any length, so a groove can be *through-composed* and morph verse→build→chorus with zero seams. Swing is dialable (0.5–0.7).
+- **Drums** take preset grooves (`rock`, `trap`, `house`, `funk`, `disco`, `boombap`, `bossa`, `shuffle`) or custom per-lane step strings — `kick: "x..x....x..x...."`, `X` = accent — across **8 lanes** (kick, snare, hat, clap, ride, conga, shaker, tambourine) of any length, so a groove can be *through-composed* and morph verse→build→chorus with zero seams. Swing is dialable (0.5–0.7).
 - **Production polish**: `pump` (sidechain ducking on every kick), `humanize` (±12 ms timing and velocity wobble so the band breathes).
-- **The stage show**: a floating Now-Performing HUD with per-track activity dots; the on-screen piano fingers every part live (each of the 32 instruments has a **signature color** — unison notes blend); the engraved staff renders the lead line and follows it with a moving playhead; the Beat Lab grid mirrors the actual groove bar by bar; and key-press fireworks scale with each note's length and velocity.
+- **The stage show**: a floating Now-Performing HUD with per-track activity dots; the on-screen piano fingers every part live (each of the 35 instruments has a **signature color** — unison notes blend); the engraved staff renders the lead line and follows it with a moving playhead; the Beat Lab grid mirrors the actual groove bar by bar; and key-press fireworks scale with each note's length and velocity.
 
 ### 🎤 Sing → Song
 - **🪄 Songify** (Studio tab): one button, zero AI — records → transcribes → infers your key from a pitch-class histogram → fits a diatonic chord to every bar → the band plays your tune **with your own voice singing it**, then an instrument echoes it.
@@ -93,7 +93,7 @@ Parses an ABC-style notation format and renders a real engraved staff as SVG (ke
 Record from the mic or the instrument itself. Live tuner (note/frequency/cents). **Autotune Lab**: YIN pitch detection → snap-to-scale → time-varying pitch shifter, from gentle correction to full T-Pain. **Harmonizer** turns one take into 3-part harmony. **Sing → Sheet** transcription. Export takes as WAV.
 
 ### 🎹 Instrument
-3-octave on-screen piano (mouse/touch/glissando/computer keys/Web MIDI) with **32 synthesized voices** across keys, mallets, plucked strings (Karplus-Strong guitars incl. overdrive), winds, brass, strings, pads, and synths (incl. wobble bass and 8-bit chip) — per-voice vibrato, tremolo, attack transients, pitch scoops, convolution reverb, and a master glue-compressor chain.
+3-octave on-screen piano (mouse/touch/glissando/computer keys/Web MIDI) with **35 synthesized voices** across keys, mallets, plucked strings (Karplus-Strong guitars incl. overdrive and auto-wah funk), winds, brass, strings, pads (incl. a formant-filtered gospel choir), and synths (incl. wobble bass, a true 808 sub with pitch-drop and drive, and 8-bit chip) — per-voice vibrato, tremolo, attack transients, pitch scoops, convolution reverb, and a master glue-compressor chain.
 
 ### 💾 Exports
 - **⬇ Band MIDI**: the last band performance as a **multitrack format-1 MIDI file** — one named track per instrument with General MIDI programs and pans, drums on channel 10 with accents. Opens as a real production in GarageBand/Logic/Ableton.
@@ -116,6 +116,7 @@ Claude saves songs to `songs/*.json`; they appear in the page's Songbook and rep
 | `transcribe_recording` | Turn the user's latest mic take into notation (the hum→song entry point) |
 | `save_song` / `list_songs` / `play_song` | Persist, list, and perform Songbook songs |
 | `get_song` | Read a saved song — compact structural summary, or drill into one part/track |
+| `delete_song` | Remove a song (recoverably — it moves to `songs/.trash/`) |
 | `edit_song` | Surgical dot-path edits (`set`/`delete`/`append`/`insert`) — e.g. `parts.0.tracks.2.gain` — without resending the song |
 | `start_waterfall` | Launch falling-notes play-along on the current sheet (optional wait-mode) |
 | `drum_groove` | Start/stop a looping drum pattern |

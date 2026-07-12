@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { WebSocketServer } from 'ws';
 import { execFile, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
-import { readFile, unlink, readdir, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, unlink, readdir, mkdir, writeFile, rename } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -37,6 +37,17 @@ async function songLoad(name) {
 async function songSave(song) {
   await mkdir(SONGS_DIR, { recursive: true });
   await writeFile(path.join(SONGS_DIR, song.name + '.json'), JSON.stringify(song, null, 2));
+}
+
+// Deleting moves the file into songs/.trash/ (timestamped) — recoverable by hand.
+async function songDelete(name) {
+  const clean = String(name).replace(/[^\w-]/g, '');
+  const from = path.join(SONGS_DIR, clean + '.json');
+  const song = JSON.parse(await readFile(from, 'utf8'));   // throws if it doesn't exist
+  const trash = path.join(SONGS_DIR, '.trash');
+  await mkdir(trash, { recursive: true });
+  await rename(from, path.join(trash, `${clean}-${Date.now()}.json`));
+  return song;
 }
 
 function arrangementBeats(p) {
@@ -327,7 +338,7 @@ async function synthSpeech(text, voice, wpm) {
 export const WS_PORT = 8779;
 export const APP_URL = 'http://localhost:8778';
 
-export const VOICES = 'piano, epiano, organ, harpsi, clav, musicbox, vibes, kalimba, celeste, steel, marimba, glocken, tubular, aguitar, nylon, eguitar, overdrive, harp, flute, brass, theremin, clarinet, oboe, trumpet, strings, pad, cello, lead, synthwave, bass, chip, wobble';
+export const VOICES = 'piano, epiano, organ, harpsi, clav, musicbox, vibes, kalimba, celeste, steel, marimba, glocken, tubular, aguitar, nylon, eguitar, overdrive, wah, harp, flute, brass, theremin, clarinet, oboe, trumpet, strings, pad, cello, choir, lead, synthwave, bass, sub808, chip, wobble';
 
 export function createBridge() {
   const tabs = new Map();     // ws -> { fresh, version, alive }
@@ -345,6 +356,11 @@ export function createBridge() {
     try {
       if (m.pageReq === 'play_song') await performSong(await songLoad(m.name), send, push);
       else if (m.pageReq === 'stop_song') { stopShow(); await send({ cmd: 'stop' }).catch(() => {}); }
+      else if (m.pageReq === 'delete_song') {
+        const song = await songDelete(m.name);
+        push({ push: 'songs', songs: await songList() });
+        push({ push: 'perform', text: `🗑 deleted “${song.title || song.name}” (recoverable in songs/.trash/)` });
+      }
     } catch (e) {
       push({ push: 'perform', text: '⚠️ ' + e.message });
     }
@@ -576,7 +592,9 @@ export function registerTools(server, bridge) {
     steps: z.object({
       kick: z.string().optional(), snare: z.string().optional(), hat: z.string().optional(),
       clap: z.string().optional(), ride: z.string().optional(),
-    }).optional().describe('custom groove: per-lane step string, one char per 16th: x=hit, X=accent, .=rest — e.g. kick "x...x...x..xx..."; lanes loop'),
+      conga: z.string().optional().describe('hand drum; X = higher slap tone'),
+      shaker: z.string().optional(), tamb: z.string().optional(),
+    }).optional().describe('custom groove: per-lane step string, one char per 16th: x=hit, X=accent, .=rest — e.g. kick "x...x...x..xx..."; lanes loop. Lanes: kick snare hat clap ride conga shaker tamb'),
     swing: z.number().optional().describe('0.5 = straight (default), up to 0.7 = hard shuffle'),
     gain: z.number().optional().describe('kit volume 0-1.5, default 1'),
     bars: z.number().optional().describe('loop for exactly this many 4/4 bars (default: until the longest track ends)'),
@@ -836,6 +854,19 @@ export function registerTools(server, bridge) {
         await songSave(song);
         push({ push: 'songs', songs: await songList() });
         return ok({ edited: name, ops: ops.length, estSeconds: estimateSeconds(song) });
+      } catch (e) { return fail(e); }
+    }
+  );
+
+  server.tool(
+    'delete_song',
+    'Delete a saved Songbook song. Not destructive-forever: the file moves to songs/.trash/ (timestamped) and can be restored by hand. The page Songbook updates immediately. Confirm with the user before deleting anything they might care about.',
+    { name: z.string().describe('kebab-case id from list_songs') },
+    async ({ name }) => {
+      try {
+        const song = await songDelete(name);
+        push({ push: 'songs', songs: await songList() });
+        return ok({ deleted: name, title: song.title || name, recoverable: 'songs/.trash/' });
       } catch (e) { return fail(e); }
     }
   );
