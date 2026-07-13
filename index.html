@@ -43,7 +43,11 @@
     white-space: nowrap;
   }
   header .tagline { color: var(--dim); font-size: 12px; margin-top: 2px; }
-  #viz { border-radius: 6px; background: #0e1224; flex-shrink: 0; }
+  #viz {
+    border-radius: 8px; background: #0e1224; flex-shrink: 0;
+    width: clamp(140px, 24vw, 320px); height: 48px;
+    box-shadow: inset 0 0 18px rgba(20, 12, 40, .8);
+  }
   .hspacer { flex: 1; }
   .ctl { display: flex; flex-direction: column; gap: 3px; font-size: 11px; color: var(--dim); }
   .ctl select, .ctl input[type=range] { accent-color: var(--cyan); }
@@ -249,7 +253,7 @@
     <h1>🎹 Muse Machine</h1>
     <div class="tagline">read · play · record · autotune · <span id="mcpStatus" style="color:#565b78">🤖 bridge off</span></div>
   </div>
-  <canvas id="viz" width="140" height="34"></canvas>
+  <canvas id="viz" width="320" height="48"></canvas>
   <div class="hspacer"></div>
   <div class="ctl">
     <span>Voice</span>
@@ -362,6 +366,8 @@
           <option value="shuffle">Shuffle</option>
           <option value="clear">— clear —</option>
         </select>
+        <button id="blSave" title="Save this groove (grid + swing) in your browser">💾</button>
+        <button id="blDel" title="Delete the selected saved groove" style="display:none">🗑</button>
         <label>plays under the sheet, records via “This Instrument”</label>
       </div>
       <div id="blGrid"></div>
@@ -499,7 +505,7 @@ function ensureAudio() {
   dryGain = ctx.createGain(); dryGain.gain.value = 1;
   revSend = ctx.createGain(); revSend.gain.value = 0.3;
   convolver = ctx.createConvolver(); convolver.buffer = makeImpulse(2.2, 2.5);
-  analyser = ctx.createAnalyser(); analyser.fftSize = 128;
+  analyser = ctx.createAnalyser(); analyser.fftSize = 256; analyser.smoothingTimeConstant = 0.75;
   // master glue: gentle bus compression into a soft clipper keeps chords and
   // vocals from stacking into harsh digital clipping
   glueComp = ctx.createDynamicsCompressor();
@@ -1119,6 +1125,7 @@ function playTune() {
   if (!currentTune || playState) return;
   stopPractice();
   ensureAudio();
+  $('sheetScroll').scrollLeft = 0;            // start the show at bar one
   const tempo = +document.getElementById('tempoSlider').value;
   const tl = buildTimeline(currentTune, tempo);
   const t0 = ctx.currentTime + 0.15;
@@ -1860,22 +1867,159 @@ function drawWave(data, tuned = false) {
   c.stroke();
 }
 
+// Header visualizer: 48 log-spaced spectrum bars swept through the app
+// palette (magenta lows → cyan mids → gold highs) with a blurred glow pass,
+// falling white peak caps, a translucent waveform ribbon, a bass-transient
+// floor flash — and a gentle breathing wave when the room is quiet.
+let viz = null;
+const VIZ_N = 48;
+function vizColor(t) {          // palette sweep: #e14e9e → #4ee1c8 → #f0c850
+  const stops = [[225, 78, 158], [78, 225, 200], [240, 200, 80]];
+  const x = t * (stops.length - 1), i = Math.min(stops.length - 2, Math.floor(x)), f = x - i;
+  const c0 = stops[i], c1 = stops[i + 1];
+  return `rgb(${c0.map((v, k) => Math.round(v + (c1[k] - v) * f)).join(',')})`;
+}
 function vizLoop() {
   requestAnimationFrame(vizLoop);
   const cv = document.getElementById('viz'), c = cv.getContext('2d');
-  c.clearRect(0, 0, cv.width, cv.height);
-  if (!analyser) return;
-  const arr = new Uint8Array(analyser.frequencyBinCount);
-  analyser.getByteFrequencyData(arr);
-  const n = 24, bw = cv.width / n;
-  for (let i = 0; i < n; i++) {
-    const v = arr[Math.floor(i * arr.length / n)] / 255;
-    const h = Math.max(2, v * cv.height);
-    const grad = c.createLinearGradient(0, cv.height, 0, 0);
-    grad.addColorStop(0, '#4ee1c8'); grad.addColorStop(1, '#e14e9e');
-    c.fillStyle = grad;
-    c.fillRect(i * bw + 1, cv.height - h, bw - 2, h);
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const cw = Math.round((cv.clientWidth || 320) * dpr), ch = Math.round((cv.clientHeight || 48) * dpr);
+  if (!viz || cv.width !== cw || cv.height !== ch) {
+    cv.width = cw; cv.height = ch;
+    viz = { bars: new Float32Array(VIZ_N), peaks: new Float32Array(VIZ_N),
+            vel: new Float32Array(VIZ_N), prev: new Float32Array(VIZ_N),
+            colors: [...Array(VIZ_N)].map((_, i) => vizColor(i / (VIZ_N - 1))),
+            parts: [], bass: 0, prevBass: 0, flash: 0, t: 0 };
   }
+  const W = cv.width, H = cv.height;
+  c.clearRect(0, 0, W, H);
+  viz.t += 1 / 60;
+
+  let freq = null, wave = null;
+  if (analyser && ctx && ctx.state === 'running') {
+    freq = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(freq);
+    wave = new Uint8Array(analyser.fftSize);
+    analyser.getByteTimeDomainData(wave);
+  }
+  let silent = true, bassNow = 0;
+  for (let i = 0; i < VIZ_N; i++) {
+    let v = 0;
+    if (freq) {
+      const f = Math.pow(i / VIZ_N, 1.35) * (freq.length - 2);   // log-ish: widen the lows
+      const b = Math.floor(f);
+      v = (freq[b] + freq[b + 1]) / 510;
+      if (i < 8) bassNow += v / 8;
+    }
+    if (v > 0.02) silent = false;
+    const cur = viz.bars[i];
+    viz.bars[i] = v > cur ? cur + (v - cur) * 0.55 : cur * 0.88;  // fast attack, slow decay
+    if (viz.bars[i] >= viz.peaks[i]) { viz.peaks[i] = viz.bars[i]; viz.vel[i] = 0; }
+    else { viz.vel[i] += 0.0015; viz.peaks[i] = Math.max(viz.bars[i], viz.peaks[i] - viz.vel[i]); }
+  }
+
+  // spark fireworks: erupt from a bar's top when it jumps (per-bar attack)
+  const bw = W / VIZ_N, top = 3 * dpr, floor = Math.round(H * 0.72);
+  for (let i = 0; i < VIZ_N; i++) {
+    const atk = viz.bars[i] - viz.prev[i];
+    viz.prev[i] = viz.bars[i];
+    if (atk > 0.14 && viz.parts.length < 130) {
+      for (let k = 0, n = atk > 0.3 ? 3 : 1; k < n; k++) {
+        viz.parts.push({ x: (i + 0.5) * bw, y: floor - viz.bars[i] * (floor - top),
+          vx: (Math.random() - 0.5) * 1.4 * dpr, vy: -(0.7 + Math.random() * 1.8) * dpr,
+          life: 1, color: viz.colors[i] });
+      }
+    }
+  }
+  const drawParts = () => {
+    if (!viz.parts.length) return;
+    c.save();
+    c.globalCompositeOperation = 'lighter';
+    viz.parts = viz.parts.filter(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.045 * dpr; p.life -= 0.028;
+      if (p.life <= 0 || p.y > H || p.x < 0 || p.x > W) return false;
+      c.globalAlpha = p.life;
+      c.fillStyle = p.color;
+      c.fillRect(p.x, p.y, 1.7 * dpr, 1.7 * dpr);
+      return true;
+    });
+    c.restore();
+    c.globalAlpha = 1;
+  };
+
+  if (silent && viz.bars.every(b => b < 0.015)) {                 // idle: breathe
+    c.lineWidth = 1.5 * dpr;
+    for (let k = 0; k < 2; k++) {
+      c.strokeStyle = k ? 'rgba(225,78,158,0.25)' : 'rgba(78,225,200,0.35)';
+      c.beginPath();
+      for (let x = 0; x <= W; x += 3 * dpr) {
+        const y = H / 2 + Math.sin(x / W * 6.28 * 2 + viz.t * (k ? 1.4 : 2)) *
+                  H * 0.10 * (1 + 0.5 * Math.sin(viz.t * 0.7 + k * 2));
+        x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+      }
+      c.stroke();
+    }
+    drawParts();                                                  // let leftovers burn out
+    return;
+  }
+
+  // bass-transient floor flash
+  if (bassNow > viz.prevBass * 1.35 && bassNow > 0.25) viz.flash = 1;
+  viz.prevBass = bassNow;
+  viz.flash *= 0.86;
+  if (viz.flash > 0.03) {
+    const g = c.createRadialGradient(W / 2, floor, 0, W / 2, floor, W / 2);
+    g.addColorStop(0, `rgba(225,78,158,${0.30 * viz.flash})`);
+    g.addColorStop(1, 'rgba(225,78,158,0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, W, H);
+  }
+
+  const drawBars = () => {
+    for (let i = 0; i < VIZ_N; i++) {
+      const h = Math.max(1.5 * dpr, viz.bars[i] * (floor - top));
+      c.fillStyle = viz.colors[i];
+      c.beginPath();
+      c.roundRect(i * bw + bw * 0.18, floor - h, bw * 0.64, h, bw * 0.3);
+      c.fill();
+    }
+  };
+  c.save();                                                       // mirrored reflection
+  c.globalAlpha = 0.25;
+  c.translate(0, 2 * floor);
+  c.scale(1, -1);
+  drawBars();
+  c.restore();
+  const fg = c.createLinearGradient(0, floor, 0, H);              // fade it into the floor
+  fg.addColorStop(0, 'rgba(14,18,36,0.15)');
+  fg.addColorStop(1, 'rgba(14,18,36,1)');
+  c.fillStyle = fg;
+  c.fillRect(0, floor, W, H - floor);
+  c.fillStyle = 'rgba(255,255,255,0.10)';                         // glossy floor line
+  c.fillRect(0, floor, W, 1 * dpr);
+  c.save();                                                       // glow pass
+  c.filter = `blur(${4 * dpr}px)`;
+  c.globalCompositeOperation = 'lighter';
+  c.globalAlpha = 0.6;
+  drawBars();
+  c.restore();
+  drawBars();                                                     // crisp pass
+  c.fillStyle = 'rgba(255,255,255,0.85)';                         // falling peak caps
+  for (let i = 0; i < VIZ_N; i++) {
+    if (viz.peaks[i] < 0.03) continue;
+    c.fillRect(i * bw + bw * 0.18, floor - viz.peaks[i] * (floor - top) - 2 * dpr, bw * 0.64, 1.5 * dpr);
+  }
+  if (wave) {                                                     // waveform ribbon
+    c.strokeStyle = 'rgba(255,255,255,0.28)';
+    c.lineWidth = 1.2 * dpr;
+    c.beginPath();
+    for (let x = 0; x < W; x += 2 * dpr) {
+      const y = floor * 0.5 + (wave[Math.floor(x / W * wave.length)] - 128) / 128 * floor * 0.42;
+      x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+    }
+    c.stroke();
+  }
+  drawParts();                                                    // sparks on top
 }
 
 // ---------------- Sheet music import ----------------
@@ -2185,6 +2329,7 @@ function loadAbcIntoEditor(abc, message) {
   $('customBox').style.display = 'block';
   $('abcInput').value = abc;
   renderSheet(parseTune(abc));
+  $('sheetScroll').scrollLeft = 0;            // new music: show it from bar one
   switchTab('Sheet');
   $('stats').textContent = message;
 }
@@ -3893,13 +4038,65 @@ $('btnBandSave').onclick = () => {
   $('stats').textContent = '💾 saving…';
 };
 $('blPlay').onclick = blToggle;
+// Saved grooves live in localStorage and appear in the Pattern dropdown
+// under "💾 My grooves" — page-local, no bridge required.
+const GROOVES_KEY = 'museGrooves';
+const groovesLoad = () => { try { return JSON.parse(localStorage.getItem(GROOVES_KEY)) || {}; } catch (e) { return {}; } };
+function blRefreshSaved(selectName) {
+  const sel = $('blPreset');
+  sel.querySelector('optgroup')?.remove();
+  const names = Object.keys(groovesLoad());
+  if (names.length) {
+    const og = document.createElement('optgroup');
+    og.label = '💾 My grooves';
+    for (const n of names) {
+      const o = document.createElement('option');
+      o.value = 'saved:' + n;
+      o.textContent = n;
+      og.appendChild(o);
+    }
+    sel.appendChild(og);
+  }
+  if (selectName) sel.value = 'saved:' + selectName;
+  $('blDel').style.display = sel.value.startsWith('saved:') ? '' : 'none';
+}
+$('blSave').onclick = () => {
+  const cur = $('blPreset').value;
+  const name = (prompt('Name this groove:', cur.startsWith('saved:') ? cur.slice(6) : 'my groove') || '')
+    .trim().slice(0, 24);
+  if (!name) return;
+  const g = groovesLoad();
+  g[name] = { pattern: blPattern.map(r => [...r]), swing: blSwing };
+  localStorage.setItem(GROOVES_KEY, JSON.stringify(g));
+  blRefreshSaved(name);
+};
+$('blDel').onclick = () => {
+  const sel = $('blPreset');
+  if (!sel.value.startsWith('saved:')) return;
+  const g = groovesLoad();
+  delete g[sel.value.slice(6)];
+  localStorage.setItem(GROOVES_KEY, JSON.stringify(g));
+  sel.value = 'rock';
+  blRefreshSaved();
+  blPattern = blFromPreset(BL_PRESETS.rock);
+  blSwing = 0.5;
+  blBuild();
+};
 $('blPreset').onchange = e => {
-  blPattern = blFromPreset(BL_PRESETS[e.target.value]);
-  blSwing = BL_SWING[e.target.value] || 0.5;
+  const v = e.target.value;
+  if (v.startsWith('saved:')) {
+    const g = groovesLoad()[v.slice(6)];
+    if (g) { blPattern = blFromPreset(g.pattern); blSwing = g.swing || 0.5; }
+  } else {
+    blPattern = blFromPreset(BL_PRESETS[v]);
+    blSwing = BL_SWING[v] || 0.5;
+  }
+  $('blDel').style.display = v.startsWith('saved:') ? '' : 'none';
   blBuild();
 };
 $('midiLink').onclick = e => { e.preventDefault(); connectMidi(e.target); };
 blBuild();
+blRefreshSaved();
 
 // ---------------- Singing engine: formant synthesis ----------------
 // A sawtooth "glottal source" shaped by parallel bandpass filters at real
@@ -4326,7 +4523,7 @@ function melodizeBuffer(input, sr, notes, tempo = 90, vib = 1) {
 // this page connects to it and executes play commands with the real synth.
 let mcpWs = null, mcpBus = null, vocalSrcs = [];
 
-const PAGE_VERSION = '2026-07-12.4';
+const PAGE_VERSION = '2026-07-12.7';
 
 // ---- audio unlock banner: autoplay policy blocks sound until a click ----
 // When a bridge command arrives before any user gesture, remember it, show
