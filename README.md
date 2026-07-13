@@ -73,7 +73,7 @@ Settings → Connectors → Add custom connector → `https://localhost:8790/mcp
 Claude's `play_arrangement` tool performs as a **full band on one sample-accurate clock**: up to 12 melodic/chordal tracks (each with its own synth voice, gain, stereo pan, and entry beat), a step-programmable drum kit, and vocal lines dropped into the mix at exact beats.
 
 - **Chords** are pitch arrays; `startBeat` writes intros, builds, and drops.
-- **Drums** take preset grooves (`rock`, `trap`, `house`, `funk`, `disco`, `boombap`, `bossa`, `shuffle`) or custom per-lane step strings — `kick: "x..x....x..x...."`, `X` = accent — across **8 lanes** (kick, snare, hat, clap, ride, conga, shaker, tambourine) of any length, so a groove can be *through-composed* and morph verse→build→chorus with zero seams. Swing is dialable (0.5–0.7).
+- **Drums** take preset grooves (`rock`, `trap`, `house`, `funk`, `disco`, `boombap`, `bossa`, `shuffle`) or custom per-lane step strings — `kick: "x..x....x..x...."`, `X` = accent — across **8 lanes** (kick, snare, hat, clap, ride, conga, shaker, tambourine) of any length, so a groove can be *through-composed* and morph verse→build→chorus with zero seams. Swing is dialable (0.5–0.7), and the Beat Lab panel can 💾 save your custom grids in-browser.
 - **Production polish**: `pump` (sidechain ducking on every kick), `humanize` (±12 ms timing and velocity wobble so the band breathes).
 - **The stage show**: a floating Now-Performing HUD with per-track activity dots; the on-screen piano fingers every part live (each of the 35 instruments has a **signature color** — unison notes blend); the engraved staff renders the lead line and follows it with a moving playhead; the Beat Lab grid mirrors the actual groove bar by bar; and key-press fireworks scale with each note's length and velocity.
 
@@ -86,7 +86,7 @@ Claude's `play_arrangement` tool performs as a **full band on one sample-accurat
 
 ### 🎸 Riff → Song
 Hit **🎸 Riff**, play a few notes on the keyboard, type a style or artist — then pick your tier:
-- **🤖 Claude completes it**: the bridge composes a full production around your motif — idiomatic voices, through-composed drums, a real arc — and the band performs it (takes a few minutes). It's a **reverse bridge**: the MCP server spawns headless Claude Code (`claude -p`) on your **Claude subscription — no API key**. (Claude Code strips its auth from MCP server environments, so the bridge borrows the `CLAUDE_CODE_OAUTH_TOKEN` from your own running Claude Code process — your token, your machine, your request. Set the token explicitly in the server's env to skip the borrowing.) Fallbacks, in order: a `claude` CLI login, a token from `claude setup-token` placed in the server's env, or `ANTHROPIC_API_KEY` (direct Opus 4.8 API call with a structured-output schema).
+- **🤖 Claude completes it**: the bridge composes a full production around your motif — idiomatic voices, through-composed drums, a real arc — and the band performs it (takes a few minutes; a composing card on the page shows live progress). It's a **reverse bridge**: the MCP server spawns headless Claude Code (`claude -p`) on your **Claude subscription — no API key**. (Claude Code strips its auth from MCP server environments, so the bridge borrows the `CLAUDE_CODE_OAUTH_TOKEN` from your own running Claude Code process — your token, your machine, your request. Set the token explicitly in the server's env to skip the borrowing.) Fallbacks, in order: a `claude` CLI login, a token from `claude setup-token` placed in the server's env, or `ANTHROPIC_API_KEY` (direct Opus 4.8 API call with a structured-output schema).
 - **⚡ Instant**: a zero-AI music-theory engine (key inference, diatonic motif development, style templates) — works offline, never burns a token.
 
 Enter in the style box picks 🤖 when the bridge is connected, ⚡ otherwise.
@@ -95,13 +95,13 @@ Enter in the style box picks 🤖 when the bridge is connected, ⚡ otherwise.
 Synthesia-style falling notes that land on the real on-screen keys, for anything the staff can hold (built-ins, imports, Band Mode leads, your transcribed hums). Flow mode scores your timing (hit/miss/streak, gold bursts on hits); **✋ wait-for-me** holds each note at the line until you play it. Works with mouse, computer keyboard, or a real MIDI keyboard, and pauses itself when you switch tabs.
 
 ### 📜 Sheet music
-Parses an ABC-style notation format and renders a real engraved staff as SVG (key signatures, accidentals, ledger lines, flags, dotted notes, rests). Five built-in pieces plus a live notation editor. **🎯 Practice Mode** teaches note-by-note with scoring. Upload (or drag & drop) `.abc`/`.txt`, MusicXML (`.musicxml`/`.xml`/`.mxl` — unzipped in-browser), or `.mid` — everything lands in the editor as editable text.
+Parses an ABC-style notation format and renders a real engraved staff as SVG (key signatures, accidentals, ledger lines, flags, dotted notes, rests). Fourteen built-in pieces plus a live notation editor. **🎯 Practice Mode** teaches note-by-note with scoring. Upload (or drag & drop) `.abc`/`.txt`, MusicXML (`.musicxml`/`.xml`/`.mxl` — unzipped in-browser), or `.mid` — everything lands in the editor as editable text.
 
 ### 🎙️ Studio
 Record from the mic or the instrument itself. Live tuner (note/frequency/cents). **Autotune Lab**: YIN pitch detection → snap-to-scale → time-varying pitch shifter, from gentle correction to full T-Pain. **Harmonizer** turns one take into 3-part harmony. **Sing → Sheet** transcription. Export takes as WAV.
 
 ### 🎹 Instrument
-3-octave on-screen piano (mouse/touch/glissando/computer keys/Web MIDI) with **35 synthesized voices** across keys, mallets, plucked strings (Karplus-Strong guitars incl. overdrive and auto-wah funk), winds, brass, strings, pads (incl. a formant-filtered gospel choir), and synths (incl. wobble bass, a true 808 sub with pitch-drop and drive, and 8-bit chip) — per-voice vibrato, tremolo, attack transients, pitch scoops, convolution reverb, and a master glue-compressor chain.
+3-octave on-screen piano (mouse/touch/glissando/computer keys/Web MIDI) — note names on every key, right-click keys to build a chord and left-click to strum it — with **35 synthesized voices** across keys, mallets, plucked strings (Karplus-Strong guitars incl. overdrive and auto-wah funk), winds, brass, strings, pads (incl. a formant-filtered gospel choir), and synths (incl. wobble bass, a true 808 sub with pitch-drop and drive, and 8-bit chip) — per-voice vibrato, tremolo, attack transients, pitch scoops, convolution reverb, and a master glue-compressor chain.
 
 ### 💾 Exports
 - **⬇ Band MIDI**: the last band performance as a **multitrack format-1 MIDI file** — one named track per instrument with General MIDI programs and pans, drums on channel 10 with accents. Opens as a real production in GarageBand/Logic/Ableton.
@@ -109,7 +109,7 @@ Record from the mic or the instrument itself. Live tuner (note/frequency/cents).
 - **⬇ MIDI**: the current sheet as a single-track `.mid` (round-trips through the uploader).
 
 ### 🎼 Songbook
-Songs live in `songs/*.json` and replay anytime via the **▶ Perform** button or the `play_song` tool — no AI required after composition. Two ways in: Claude saves via `save_song`, or hit **💾 Save Song** after any band performance (it appears next to ⬇ Band MIDI) — name collisions auto-suffix instead of overwriting. Songs are plain JSON you can read, diff, and version-control.
+Songs live in `songs/*.json` and replay anytime via the **▶ Perform** button or the `play_song` tool — no AI required after composition. The repo ships with 14 example songs to perform out of the box. Two ways in: Claude saves via `save_song`, or hit **💾 Save Song** after any band performance (it appears next to ⬇ Band MIDI) — name collisions auto-suffix instead of overwriting. Songs are plain JSON you can read, diff, and version-control.
 
 ---
 
@@ -128,7 +128,7 @@ Songs live in `songs/*.json` and replay anytime via the **▶ Perform** button o
 | `edit_song` | Surgical dot-path edits (`set`/`delete`/`append`/`insert`) — e.g. `parts.0.tracks.2.gain` — without resending the song |
 | `start_waterfall` | Launch falling-notes play-along on the current sheet (optional wait-mode) |
 | `drum_groove` | Start/stop a looping drum pattern |
-| `set_voice` | Switch the instrument voice (32 options) |
+| `set_voice` | Switch the instrument voice (35 options) |
 | `get_status` | Connection, audio, and bridge diagnostics |
 | `stop_music` | Stop everything |
 | `sing` / `speak` | TTS vocals/announcements — optional, gated behind `MUSE_VOICE=1` (studio-voice vocals don't need it) |
