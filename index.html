@@ -478,7 +478,12 @@
   <div id="piano"></div>
   <div id="pianoHelp">
     Play with your mouse, touch, or keys <kbd>A</kbd>–<kbd>;</kbd> (black keys on <kbd>W</kbd><kbd>E</kbd><kbd>T</kbd><kbd>Y</kbd><kbd>U</kbd>…) ·
-    <kbd>Z</kbd>/<kbd>X</kbd> shift octave · right-click keys to build a chord, left-click to strum it · <a href="#" id="midiLink">🎹 connect a MIDI keyboard</a>
+    <kbd>Z</kbd>/<kbd>X</kbd> shift octave · Key: <select id="kbKey" style="font-size:11px;padding:2px 4px">
+      <option value="0" selected>C</option><option value="1">D♭</option><option value="2">D</option>
+      <option value="3">E♭</option><option value="4">E</option><option value="5">F</option>
+      <option value="6">F♯</option><option value="-5">G</option><option value="-4">A♭</option>
+      <option value="-3">A</option><option value="-2">B♭</option><option value="-1">B</option>
+    </select> · right-click keys to build a chord, left-click to strum it · <a href="#" id="midiLink">🎹 connect a MIDI keyboard</a>
   </div>
 </div>
 
@@ -1456,7 +1461,7 @@ function spawnKeyFX(midi, color, boost = 1) {
 function noteOn(midi, source) {
   ensureAudio();
   if (activeHandles.has(midi)) return;
-  activeHandles.set(midi, synthNoteOn(midi));
+  activeHandles.set(midi, synthNoteOn(midi + kbTranspose));
   setKeyActive(midi, true);
   if (source === 'user') {
     const clr = voiceColor(currentVoice);      // sparks in the selected instrument's color
@@ -1487,13 +1492,21 @@ const KEYMAP = { a:0, w:1, s:2, e:3, d:4, f:5, t:6, g:7, y:8, h:9, u:10, j:11, k
 let baseOctaveMidi = 60; // C4
 const heldKeys = new Set();
 
+// keyboard transpose: play C fingering, hear the selected key
+let kbTranspose = 0;
+$('kbKey').addEventListener('change', e => {
+  allNotesOff();
+  kbTranspose = +e.target.value;
+  e.target.blur();               // give the keys back to the piano (Z/X etc.)
+});
+
 window.addEventListener('keydown', e => {
   if (e.repeat || e.metaKey || e.ctrlKey || e.altKey) return;
   const tag = document.activeElement && document.activeElement.tagName;
   if (tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT') return;
   const k = e.key.toLowerCase();
-  if (k === 'z') { baseOctaveMidi = Math.max(36, baseOctaveMidi - 12); updateKbdLabels(); return; }
-  if (k === 'x') { baseOctaveMidi = Math.min(72, baseOctaveMidi + 12); updateKbdLabels(); return; }
+  if (k === 'z') { shiftKeyboardOctave(-12); return; }
+  if (k === 'x') { shiftKeyboardOctave(+12); return; }
   if (k in KEYMAP && !heldKeys.has(k)) {
     heldKeys.add(k);
     noteOn(baseOctaveMidi + KEYMAP[k], 'user');
@@ -1504,6 +1517,23 @@ window.addEventListener('keyup', e => {
   const k = e.key.toLowerCase();
   if (heldKeys.has(k)) { heldKeys.delete(k); noteOff(baseOctaveMidi + KEYMAP[k]); }
 });
+
+// Z/X move the WHOLE keyboard: every key's pitch and printed name shift an
+// octave, so mouse clicks, chord strums, and the letter keys all follow.
+function shiftKeyboardOctave(d) {
+  const next = baseOctaveMidi + d;
+  if (next < 36 || next > 72) return;
+  allNotesOff();
+  baseOctaveMidi = next;
+  for (const key of document.querySelectorAll('#piano .key')) {
+    const m = +key.dataset.midi + d;
+    key.dataset.midi = m;
+    const lbl = key.querySelector('.lbl');
+    lbl.textContent = noteName(m);
+    lbl.classList.toggle('c', m % 12 === 0);
+  }
+  updateKbdLabels();
+}
 
 function updateKbdLabels() {
   document.querySelectorAll('.key .kbd').forEach(el => el.remove());
