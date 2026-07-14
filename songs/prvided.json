@@ -1,0 +1,4105 @@
+{
+ "name": "prvided",
+ "title": "Prvided — 6LACK x Ariana x Doja",
+ "parts": [
+  {
+   "kind": "arrangement",
+   "title": "Intro — dark and empty",
+   "tempo": 70,
+   "humanize": 0.35,
+   "tracks": [
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.8,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      }
+     ]
+    },
+    {
+     "name": "808",
+     "voice": "sub808",
+     "gain": 1,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 3
+      },
+      {
+       "pitch": "D2",
+       "beats": 1,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 3
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 3
+      },
+      {
+       "pitch": "F2",
+       "beats": 1,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 3
+      },
+      {
+       "pitch": "C2",
+       "beats": 1,
+       "vel": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Bells",
+     "voice": "celeste",
+     "gain": 0.45,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      }
+     ],
+     "pan": 0.3,
+     "startBeat": 8
+    }
+   ]
+  },
+  {
+   "kind": "arrangement",
+   "title": "Verse — 6LACK low",
+   "tempo": 70,
+   "humanize": 0.35,
+   "pump": 0.15,
+   "drums": {
+    "pattern": "trap",
+    "gain": 0.9
+   },
+   "tracks": [
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.75,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      }
+     ]
+    },
+    {
+     "name": "808",
+     "voice": "sub808",
+     "gain": 1.05,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Pad",
+     "voice": "pad",
+     "gain": 0.4,
+     "notes": [
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      }
+     ],
+     "pan": -0.3
+    },
+    {
+     "name": "Lead",
+     "voice": "vibes",
+     "gain": 0.65,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 2
+      },
+      {
+       "pitch": "A3",
+       "beats": 1
+      },
+      {
+       "pitch": "C4",
+       "beats": 1
+      },
+      {
+       "pitch": "D4",
+       "beats": 2
+      },
+      {
+       "rest": true,
+       "beats": 2
+      },
+      {
+       "rest": true,
+       "beats": 1
+      },
+      {
+       "pitch": "F4",
+       "beats": 1
+      },
+      {
+       "pitch": "E4",
+       "beats": 1
+      },
+      {
+       "pitch": "C4",
+       "beats": 1
+      },
+      {
+       "pitch": "D4",
+       "beats": 3
+      },
+      {
+       "rest": true,
+       "beats": 1
+      },
+      {
+       "rest": true,
+       "beats": 2
+      },
+      {
+       "pitch": "A3",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D4",
+       "beats": 1
+      },
+      {
+       "pitch": "F4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "E4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D4",
+       "beats": 2
+      },
+      {
+       "rest": true,
+       "beats": 1
+      },
+      {
+       "pitch": "C4",
+       "beats": 1
+      },
+      {
+       "pitch": "D4",
+       "beats": 1
+      },
+      {
+       "pitch": "E4",
+       "beats": 1
+      },
+      {
+       "pitch": "D4",
+       "beats": 4
+      }
+     ],
+     "pan": 0.15
+    }
+   ]
+  },
+  {
+   "kind": "arrangement",
+   "title": "Hook — Ariana lift",
+   "tempo": 70,
+   "humanize": 0.35,
+   "pump": 0.15,
+   "drums": {
+    "pattern": "trap",
+    "gain": 0.95
+   },
+   "tracks": [
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.75,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      }
+     ]
+    },
+    {
+     "name": "808",
+     "voice": "sub808",
+     "gain": 1.05,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Choir",
+     "voice": "choir",
+     "gain": 0.5,
+     "notes": [
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      }
+     ],
+     "pan": -0.3
+    },
+    {
+     "name": "Bells",
+     "voice": "celeste",
+     "gain": 0.5,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "Bb5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "Bb5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      }
+     ],
+     "pan": 0.35
+    },
+    {
+     "name": "Voice",
+     "voice": "flute",
+     "gain": 0.8,
+     "notes": [
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "F4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 2
+      },
+      {
+       "pitch": "D5",
+       "beats": 1
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 2
+      },
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 1
+      },
+      {
+       "pitch": "F4",
+       "beats": 1
+      },
+      {
+       "pitch": "G4",
+       "beats": 2
+      },
+      {
+       "pitch": "E4",
+       "beats": 1
+      },
+      {
+       "pitch": "G4",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "F4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 2
+      },
+      {
+       "pitch": "D5",
+       "beats": 1.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 2
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 1
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 4
+      }
+     ],
+     "pan": 0.1
+    }
+   ]
+  },
+  {
+   "kind": "arrangement",
+   "title": "Beat switch — Doja funk",
+   "tempo": 105,
+   "humanize": 0.3,
+   "pump": 0.2,
+   "drums": {
+    "pattern": "disco",
+    "gain": 0.95,
+    "swing": 0.54
+   },
+   "tracks": [
+    {
+     "name": "FunkGtr",
+     "voice": "wah",
+     "gain": 0.7,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      }
+     ],
+     "pan": 0.35
+    },
+    {
+     "name": "DiscoBass",
+     "voice": "bass",
+     "gain": 1,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C3",
+       "beats": 0.5,
+       "vel": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.6,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      }
+     ],
+     "pan": -0.2
+    },
+    {
+     "name": "Voice",
+     "voice": "lead",
+     "gain": 0.7,
+     "notes": [
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 1
+      },
+      {
+       "pitch": "G4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "G4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "B4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "G4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "F5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "B4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 2
+      }
+     ],
+     "pan": 0.1
+    },
+    {
+     "name": "Bells",
+     "voice": "celeste",
+     "gain": 0.4,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "Bb5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      }
+     ],
+     "pan": 0.3,
+     "startBeat": 16
+    }
+   ]
+  },
+  {
+   "kind": "arrangement",
+   "title": "Final hook — both worlds",
+   "tempo": 70,
+   "humanize": 0.35,
+   "pump": 0.15,
+   "drums": {
+    "pattern": "trap",
+    "gain": 0.95
+   },
+   "tracks": [
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.75,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "Bb2",
+        "D3",
+        "F3",
+        "A3"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "F3",
+        "A3",
+        "C4",
+        "E4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 2.5
+      },
+      {
+       "pitch": [
+        "C3",
+        "E3",
+        "G3",
+        "D4"
+       ],
+       "beats": 1.5,
+       "vel": 0.65
+      }
+     ]
+    },
+    {
+     "name": "808",
+     "voice": "sub808",
+     "gain": 1.05,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D2",
+       "beats": 1
+      },
+      {
+       "pitch": "D2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1.75
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 1
+      },
+      {
+       "pitch": "Bb1",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "F2",
+       "beats": 1
+      },
+      {
+       "pitch": "F2",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C2",
+       "beats": 1.75
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C2",
+       "beats": 1
+      },
+      {
+       "pitch": "C2",
+       "beats": 0.5,
+       "vel": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Choir",
+     "voice": "choir",
+     "gain": 0.5,
+     "notes": [
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "Bb3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "A3",
+        "C4",
+        "F4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "G3",
+        "C4",
+        "E4"
+       ],
+       "beats": 4
+      }
+     ],
+     "pan": -0.3
+    },
+    {
+     "name": "Bells",
+     "voice": "celeste",
+     "gain": 0.5,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "Bb5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "Bb5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "C5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "E5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "C6",
+       "beats": 1
+      },
+      {
+       "pitch": "G5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "E5",
+       "beats": 1,
+       "vel": 0.7
+      }
+     ],
+     "pan": 0.35
+    },
+    {
+     "name": "FunkGtr",
+     "voice": "wah",
+     "gain": 0.5,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "D4",
+        "F4",
+        "Bb4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "F4",
+        "A4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.25,
+       "vel": 0.7
+      },
+      {
+       "rest": true,
+       "beats": 0.25
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 1
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": [
+        "C4",
+        "E4",
+        "G4"
+       ],
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "rest": true,
+       "beats": 0.5
+      }
+     ],
+     "pan": 0.4
+    },
+    {
+     "name": "Voice",
+     "voice": "flute",
+     "gain": 0.8,
+     "notes": [
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "F4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 2
+      },
+      {
+       "pitch": "D5",
+       "beats": 1
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 2
+      },
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 1
+      },
+      {
+       "pitch": "F4",
+       "beats": 1
+      },
+      {
+       "pitch": "G4",
+       "beats": 2
+      },
+      {
+       "pitch": "E4",
+       "beats": 1
+      },
+      {
+       "pitch": "G4",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 1.5
+      },
+      {
+       "pitch": "F4",
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 2
+      },
+      {
+       "pitch": "D5",
+       "beats": 1.5
+      },
+      {
+       "pitch": "C5",
+       "beats": 0.5
+      },
+      {
+       "pitch": "A4",
+       "beats": 2
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 1
+      },
+      {
+       "pitch": "C5",
+       "beats": 1
+      },
+      {
+       "pitch": "A4",
+       "beats": 1
+      },
+      {
+       "pitch": "D5",
+       "beats": 4
+      }
+     ],
+     "pan": 0.1
+    }
+   ]
+  },
+  {
+   "kind": "arrangement",
+   "title": "Outro",
+   "tempo": 70,
+   "humanize": 0.3,
+   "tracks": [
+    {
+     "name": "Keys",
+     "voice": "epiano",
+     "gain": 0.8,
+     "notes": [
+      {
+       "pitch": [
+        "D3",
+        "F3",
+        "A3",
+        "C4"
+       ],
+       "beats": 4
+      },
+      {
+       "pitch": [
+        "D3",
+        "A3",
+        "D4",
+        "F4"
+       ],
+       "beats": 4
+      }
+     ]
+    },
+    {
+     "name": "808",
+     "voice": "sub808",
+     "gain": 1,
+     "notes": [
+      {
+       "pitch": "D2",
+       "beats": 4
+      },
+      {
+       "pitch": "D2",
+       "beats": 4
+      }
+     ]
+    },
+    {
+     "name": "Bells",
+     "voice": "celeste",
+     "gain": 0.45,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 0.5
+      },
+      {
+       "pitch": "D5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.9
+      },
+      {
+       "pitch": "A5",
+       "beats": 1
+      },
+      {
+       "pitch": "F5",
+       "beats": 0.5,
+       "vel": 0.8
+      },
+      {
+       "pitch": "D5",
+       "beats": 1,
+       "vel": 0.7
+      },
+      {
+       "pitch": "D5",
+       "beats": 4
+      }
+     ],
+     "pan": 0.3
+    },
+    {
+     "name": "Voice",
+     "voice": "flute",
+     "gain": 0.7,
+     "notes": [
+      {
+       "rest": true,
+       "beats": 4
+      },
+      {
+       "pitch": "D5",
+       "beats": 3
+      },
+      {
+       "rest": true,
+       "beats": 1
+      }
+     ],
+     "pan": 0.1
+    }
+   ]
+  }
+ ]
+}
