@@ -195,7 +195,10 @@ export async function performSong(song, send, push) {
         if (show.aborted) break;
         const r = await send({ cmd: 'play_arrangement', title: part.title || song.title || song.name,
           tempo: part.tempo || tempo, swing: part.swing, tracks: part.tracks, drums: part.drums,
-          vocals, sheet: part.sheet, pump: part.pump, humanize: part.humanize });
+          vocals, sheet: part.sheet, pump: part.pump, humanize: part.humanize,
+          // song context so the page can collect parts for a whole-song WAV bounce
+          song: { name: song.name, title: song.title || song.name, part: i,
+                  count: song.parts.length, gap: part.gap ?? 0.5 } });
         await showWait(r.seconds + (part.gap ?? 0.5), show);
       } else if (part.kind === 'speak') {
         const wav = await synthSpeech(part.text, part.voice, part.rate || 175);

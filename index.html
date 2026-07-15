@@ -333,7 +333,7 @@
       <button id="btnCompose">🎲 Compose</button>
       <button id="btnMidiExport">⬇ MIDI</button>
       <button id="btnBandMidi" style="display:none" title="Export the last band performance as a multitrack MIDI file — one track per instrument, drums on channel 10">⬇ Band MIDI</button>
-      <button id="btnBandWav" style="display:none" title="Bounce the last band performance to a stereo WAV file — the full mix, rendered offline">⬇ WAV</button>
+      <button id="btnBandWav" style="display:none" title="Bounce to a stereo WAV file — the whole song when a songbook song was performed, otherwise the last band part; the full mix, rendered offline">⬇ WAV</button>
       <button id="btnBandSave" class="hot" style="display:none" title="Save the last band performance to the Songbook — replay it anytime with ▶ Perform">💾 Save Song</button>
       <label>Tempo <span id="tempoVal">120</span> BPM</label>
       <input type="range" id="tempoSlider" min="40" max="220" value="120" style="width:130px">
@@ -3274,6 +3274,7 @@ function wfFrame() {
 // the MCP 'play_arrangement' command; shows a live "Now Performing" HUD.
 let arrState = null;
 let lastArrangement = null;                     // most recent band, for MIDI export
+let lastSongBounce = null;                      // collected parts of the current songbook song, for whole-song WAV
 const ARR_LANES = ['kick', 'snare', 'hat', 'clap', 'ride', 'conga', 'shaker', 'tamb'];
 // fallback palette for rows without an instrument (vocals, drums)
 const ARR_COLORS = ['#4ee1c8', '#e14e9e', '#f0c05a', '#7aa2ff', '#9df05a',
@@ -3467,6 +3468,13 @@ async function startArrangement(msg) {
     tracks: msg.tracks, drums: msg.drums,
     vocals: (msg.vocals || []).map(v => ({ source: v.source, notes: v.notes, startBeat: v.startBeat,
       lyrics: v.lyrics, style: v.style, vibrato: v.vibrato, gain: v.gain })) };
+  // collect songbook parts (tagged by the bridge) so ⬇ WAV can bounce the whole song;
+  // non-arrangement parts (sing/speak/melody) aren't band renders and stay out of the bounce
+  if (msg.song) {
+    if (!lastSongBounce || lastSongBounce.name !== msg.song.name || (msg.song.part ?? 0) === 0)
+      lastSongBounce = { name: msg.song.name, title: msg.song.title, parts: [] };
+    lastSongBounce.parts[msg.song.part ?? 0] = { ...lastArrangement, gap: msg.song.gap };
+  } else lastSongBounce = null;                 // ad-hoc band — bounce just it
   const el = $('btnBandMidi'); if (el) el.style.display = '';
   const wv = $('btnBandWav'); if (wv) wv.style.display = '';
   const sv = $('btnBandSave'); if (sv) sv.style.display = '';
@@ -3841,45 +3849,57 @@ function arrangementToMidiBlob(arr) {
   return new Blob([new Uint8Array(bytes)], { type: 'audio/midi' });
 }
 
-// ---------------- Bounce: render a band arrangement to a stereo WAV ----------------
+// ---------------- Bounce: render band arrangement(s) to a stereo WAV ----------------
 // Swaps the global audio graph for an OfflineAudioContext with the identical
 // bus chain (reverb, glue compressor, soft clip), schedules every note and
 // drum hit up front, renders faster than realtime, then restores the live rig.
-async function renderArrangementToWav(arr) {
-  const tempo = Math.max(40, Math.min(240, arr.tempo || 100));
-  const spb = 60 / tempo;
-  let endBeat = 0;
-  for (const tr of (arr.tracks || []).slice(0, 12)) {
-    let c = Math.max(0, tr.startBeat || 0);
-    for (const n of (tr.notes || []).slice(0, 2000)) c += Math.max(0.05, n.beats || 1);
-    endBeat = Math.max(endBeat, c);
-  }
-  if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
-    const dStart = Math.max(0, arr.drums.startBeat || 0);
-    endBeat = Math.max(endBeat, arr.drums.bars ? dStart + arr.drums.bars * 4
-                                               : (endBeat > dStart ? endBeat : dStart + 16));
-  }
-  // studio vocals: render with the user's mic take (pure DSP) before the swap
-  const vox = [];
-  for (const v of (arr.vocals || []).slice(0, 6)) {
-    if (v.source !== 'studio' || !rawAudio || !rawAudio.length) continue;
-    let out = rawAudio, stereo = null;
-    if (v.notes && v.notes.length) {
-      if (window.MuseVocal) {
-        const r = MuseVocal.render(rawAudio, recSampleRate, v.notes,
-          { tempo, vibrato: v.vibrato ?? 1, style: v.style });
-        out = r.out; stereo = r.stereo;
-      } else {
-        out = melodizeBuffer(rawAudio, recSampleRate, v.notes, tempo, v.vibrato ?? 1);
-      }
+// Accepts one arrangement or an array of parts (a whole songbook song):
+// parts are laid back-to-back with each part's gap of silence, like a live show.
+async function renderArrangementToWav(arrOrParts) {
+  const partList = Array.isArray(arrOrParts) ? arrOrParts : [arrOrParts];
+  // pass 1 (live rig still in place): per-part timing + studio-vocal DSP
+  const plans = [];
+  for (const arr of partList.slice(0, 32)) {
+    const tempo = Math.max(40, Math.min(240, arr.tempo || 100));
+    const spb = 60 / tempo;
+    let endBeat = 0;
+    for (const tr of (arr.tracks || []).slice(0, 12)) {
+      let c = Math.max(0, tr.startBeat || 0);
+      for (const n of (tr.notes || []).slice(0, 2000)) c += Math.max(0.05, n.beats || 1);
+      endBeat = Math.max(endBeat, c);
     }
-    const start = Math.max(0, v.startBeat || 0);
-    vox.push({ out, stereo, sr: recSampleRate, start,
-               gain: Math.max(0, Math.min(1.5, v.gain ?? 1)), style: v.style });
-    endBeat = Math.max(endBeat, start + out.length / recSampleRate / spb);
+    if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
+      const dStart = Math.max(0, arr.drums.startBeat || 0);
+      endBeat = Math.max(endBeat, arr.drums.bars ? dStart + arr.drums.bars * 4
+                                                 : (endBeat > dStart ? endBeat : dStart + 16));
+    }
+    // studio vocals: render with the user's mic take (pure DSP) before the swap
+    const vox = [];
+    for (const v of (arr.vocals || []).slice(0, 6)) {
+      if (v.source !== 'studio' || !rawAudio || !rawAudio.length) continue;
+      let out = rawAudio, stereo = null;
+      if (v.notes && v.notes.length) {
+        if (window.MuseVocal) {
+          const r = MuseVocal.render(rawAudio, recSampleRate, v.notes,
+            { tempo, vibrato: v.vibrato ?? 1, style: v.style });
+          out = r.out; stereo = r.stereo;
+        } else {
+          out = melodizeBuffer(rawAudio, recSampleRate, v.notes, tempo, v.vibrato ?? 1);
+        }
+      }
+      const start = Math.max(0, v.startBeat || 0);
+      vox.push({ out, stereo, sr: recSampleRate, start,
+                 gain: Math.max(0, Math.min(1.5, v.gain ?? 1)), style: v.style });
+      endBeat = Math.max(endBeat, start + out.length / recSampleRate / spb);
+    }
+    if (!endBeat) continue;                           // nothing playable in this part
+    plans.push({ arr, spb, endBeat, vox, gap: Math.max(0, arr.gap ?? 0.5) });
   }
-  if (!endBeat) throw new Error('nothing to render');
-  const sr = 44100, total = endBeat * spb + 2.5;      // reverb/release tail
+  if (!plans.length) throw new Error('nothing to render');
+  let total = 2.5;                                    // reverb/release tail
+  for (const p of plans) total += p.endBeat * p.spb + p.gap;
+  total -= plans[plans.length - 1].gap;               // no silence after the last part
+  const sr = 44100;
   const saved = { ctx, masterGain, instBus, dryGain, revSend, convolver, glueComp, softClip, noiseBuf };
   try {
     ctx = new OfflineAudioContext(2, Math.ceil(total * sr), sr);
@@ -3898,79 +3918,89 @@ async function renderArrangementToWav(arr) {
     instBus.connect(revSend); revSend.connect(convolver); convolver.connect(masterGain);
     masterGain.connect(glueComp); glueComp.connect(softClip); softClip.connect(ctx.destination);
 
-    const t0 = 0.05;
-    const pumpBus = ctx.createGain(); pumpBus.connect(instBus);
-    const kickTimes = [];
-    const hz = Math.max(0, Math.min(1, arr.humanize ?? 0.35));
-    for (const tr of (arr.tracks || []).slice(0, 12)) {
-      const voice = PRESETS[tr.voice] ? tr.voice : 'piano';
-      const g = ctx.createGain();
-      g.gain.value = Math.max(0, Math.min(1.5, tr.gain ?? 0.9));
-      const pan = ctx.createStereoPanner();
-      pan.pan.value = Math.max(-1, Math.min(1, tr.pan || 0));
-      g.connect(pan); pan.connect(pumpBus);
-      let cursor = Math.max(0, tr.startBeat || 0);
-      for (const n of (tr.notes || []).slice(0, 2000)) {
-        const beats = Math.max(0.05, n.beats || 1);
-        if (!n.rest && n.pitch != null) {
-          const pitches = (Array.isArray(n.pitch) ? n.pitch : [n.pitch]).slice(0, 6);
-          const vel = Math.max(0.05, Math.min(1.27, n.vel ?? 1)) * (pitches.length > 1 ? 0.7 : 1)
-                      * (1 + (Math.random() * 2 - 1) * 0.12 * hz);
-          const jt = (Math.random() * 2 - 1) * 0.012 * hz;
-          for (const p of pitches) {
-            const midi = limitMidi(typeof p === 'number' ? p : nameToMidi(p));
-            if (midi !== null) playNoteFor(midi, Math.max(t0, t0 + cursor * spb + jt), beats * spb, vel, g, voice);
+    const anyChoir = plans.some(p => p.vox.some(v => v.style === 'choir'));
+    let voxChain = null;                              // shared vocal bus, built on demand
+    let offset = 0;                                   // seconds: where the current part starts
+    for (const plan of plans) {
+      const { arr, spb, endBeat, vox } = plan;
+      const t0 = 0.05 + offset;
+      const pumpBus = ctx.createGain(); pumpBus.connect(instBus);
+      const kickTimes = [];
+      const hz = Math.max(0, Math.min(1, arr.humanize ?? 0.35));
+      for (const tr of (arr.tracks || []).slice(0, 12)) {
+        const voice = PRESETS[tr.voice] ? tr.voice : 'piano';
+        const g = ctx.createGain();
+        g.gain.value = Math.max(0, Math.min(1.5, tr.gain ?? 0.9));
+        const pan = ctx.createStereoPanner();
+        pan.pan.value = Math.max(-1, Math.min(1, tr.pan || 0));
+        g.connect(pan); pan.connect(pumpBus);
+        let cursor = Math.max(0, tr.startBeat || 0);
+        for (const n of (tr.notes || []).slice(0, 2000)) {
+          const beats = Math.max(0.05, n.beats || 1);
+          if (!n.rest && n.pitch != null) {
+            const pitches = (Array.isArray(n.pitch) ? n.pitch : [n.pitch]).slice(0, 6);
+            const vel = Math.max(0.05, Math.min(1.27, n.vel ?? 1)) * (pitches.length > 1 ? 0.7 : 1)
+                        * (1 + (Math.random() * 2 - 1) * 0.12 * hz);
+            const jt = (Math.random() * 2 - 1) * 0.012 * hz;
+            for (const p of pitches) {
+              const midi = limitMidi(typeof p === 'number' ? p : nameToMidi(p));
+              if (midi !== null) playNoteFor(midi, Math.max(t0, t0 + cursor * spb + jt), beats * spb, vel, g, voice);
+            }
           }
+          cursor += beats;
         }
-        cursor += beats;
       }
-    }
-    if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
-      const d = arr.drums;
-      const lanes = {};
-      if (d.steps) { for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]); }
-      else if (BL_PRESETS[d.pattern]) BL_PRESETS[d.pattern].forEach((row, ri) => { lanes[BL_ROWS[ri][0]] = row; });
-      const dswing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || arr.swing || 0.5));
-      const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
-      const dg = ctx.createGain();
-      dg.gain.value = Math.max(0, Math.min(1.5, d.gain ?? 1));
-      dg.connect(instBus);
-      const dStart = Math.max(0, d.startBeat || 0);
-      const dEnd = d.bars ? dStart + d.bars * 4 : endBeat;
-      const step16 = spb / 4;
-      const nSteps = Math.min(4096, Math.round((dEnd - dStart) * 4));
-      for (let s = 0; s < nSteps; s++) {
-        const t = t0 + dStart * spb + s * step16 + (s % 2 === 1 ? (dswing - 0.5) * 2 * step16 : 0);
-        if (lanes.kick && lanes.kick[s % len]) kickTimes.push(t - t0);
-        for (const k in lanes) { const lv = lanes[k][s % len]; if (lv) drumHit(k, t, dg, lv); }
+      if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
+        const d = arr.drums;
+        const lanes = {};
+        if (d.steps) { for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]); }
+        else if (BL_PRESETS[d.pattern]) BL_PRESETS[d.pattern].forEach((row, ri) => { lanes[BL_ROWS[ri][0]] = row; });
+        const dswing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || arr.swing || 0.5));
+        const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
+        const dg = ctx.createGain();
+        dg.gain.value = Math.max(0, Math.min(1.5, d.gain ?? 1));
+        dg.connect(instBus);
+        const dStart = Math.max(0, d.startBeat || 0);
+        const dEnd = d.bars ? dStart + d.bars * 4 : endBeat;
+        const step16 = spb / 4;
+        const nSteps = Math.min(4096, Math.round((dEnd - dStart) * 4));
+        for (let s = 0; s < nSteps; s++) {
+          const t = t0 + dStart * spb + s * step16 + (s % 2 === 1 ? (dswing - 0.5) * 2 * step16 : 0);
+          if (lanes.kick && lanes.kick[s % len]) kickTimes.push(t - t0);
+          for (const k in lanes) { const lv = lanes[k][s % len]; if (lv) drumHit(k, t, dg, lv); }
+        }
       }
-    }
-    arrSchedulePump(pumpBus, kickTimes, t0, arr.pump);
-    if (vox.length) {                                 // the user's voice, mixed like the live rig
-      const hp = ctx.createBiquadFilter();
-      hp.type = 'highpass'; hp.frequency.value = 85; hp.Q.value = 0.71;
-      const presence = ctx.createBiquadFilter();
-      presence.type = 'peaking'; presence.frequency.value = 3200;
-      presence.gain.value = 2.5; presence.Q.value = 0.9;
-      const comp = ctx.createDynamicsCompressor();
-      comp.threshold.value = -18; comp.knee.value = 9;
-      comp.ratio.value = 3; comp.attack.value = 0.004; comp.release.value = 0.12;
-      const dry = ctx.createGain(); dry.gain.value = 0.95;
-      const send = ctx.createGain();
-      send.gain.value = vox.some(v => v.style === 'choir') ? 0.3 : 0.14;
-      hp.connect(presence); presence.connect(comp);
-      comp.connect(dry); dry.connect(masterGain);
-      comp.connect(send); send.connect(convolver);
-      for (const v of vox) {
-        const buf = ctx.createBuffer(v.stereo ? 2 : 1, v.out.length, v.sr);
-        if (v.stereo) { buf.copyToChannel(v.stereo[0], 0); buf.copyToChannel(v.stereo[1], 1); }
-        else buf.copyToChannel(v.out, 0);
-        const src = ctx.createBufferSource();
-        src.buffer = buf;
-        const vg = ctx.createGain(); vg.gain.value = v.gain;
-        src.connect(vg); vg.connect(hp);
-        src.start(t0 + v.start * spb);
+      arrSchedulePump(pumpBus, kickTimes, t0, arr.pump);
+      if (vox.length) {                               // the user's voice, mixed like the live rig
+        if (!voxChain) {
+          const hp = ctx.createBiquadFilter();
+          hp.type = 'highpass'; hp.frequency.value = 85; hp.Q.value = 0.71;
+          const presence = ctx.createBiquadFilter();
+          presence.type = 'peaking'; presence.frequency.value = 3200;
+          presence.gain.value = 2.5; presence.Q.value = 0.9;
+          const comp = ctx.createDynamicsCompressor();
+          comp.threshold.value = -18; comp.knee.value = 9;
+          comp.ratio.value = 3; comp.attack.value = 0.004; comp.release.value = 0.12;
+          const dry = ctx.createGain(); dry.gain.value = 0.95;
+          const send = ctx.createGain();
+          send.gain.value = anyChoir ? 0.3 : 0.14;
+          hp.connect(presence); presence.connect(comp);
+          comp.connect(dry); dry.connect(masterGain);
+          comp.connect(send); send.connect(convolver);
+          voxChain = hp;
+        }
+        for (const v of vox) {
+          const buf = ctx.createBuffer(v.stereo ? 2 : 1, v.out.length, v.sr);
+          if (v.stereo) { buf.copyToChannel(v.stereo[0], 0); buf.copyToChannel(v.stereo[1], 1); }
+          else buf.copyToChannel(v.out, 0);
+          const src = ctx.createBufferSource();
+          src.buffer = buf;
+          const vg = ctx.createGain(); vg.gain.value = v.gain;
+          src.connect(vg); vg.connect(voxChain);
+          src.start(t0 + v.start * spb);
+        }
       }
+      offset += endBeat * spb + plan.gap;
     }
     const rendered = await ctx.startRendering();
     return audioBufferToWavBlob(rendered);
@@ -4039,8 +4069,11 @@ $('btnBandWav').onclick = async () => {
   const btn = $('btnBandWav');
   btn.disabled = true; btn.textContent = '⏳ rendering…';
   try {
-    download(await renderArrangementToWav(lastArrangement),
-      (lastArrangement.title || 'muse-band').replace(/[^\w -]+/g, '') + '.wav');
+    const songParts = lastSongBounce ? lastSongBounce.parts.filter(Boolean) : [];
+    const wholeSong = songParts.length > 0;
+    download(await renderArrangementToWav(wholeSong ? songParts : lastArrangement),
+      ((wholeSong ? lastSongBounce.title || lastSongBounce.name : lastArrangement.title)
+        || 'muse-band').replace(/[^\w -]+/g, '') + '.wav');
   } catch (e) {
     $('stats').textContent = '⚠️ bounce failed: ' + e.message;
   } finally {
