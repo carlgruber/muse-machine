@@ -332,7 +332,7 @@
       <button id="btnRiff" class="hot" title="Play a few notes on the keyboard, then complete them as a full song in any style">🎸 Riff</button>
       <button id="btnCompose">🎲 Compose</button>
       <button id="btnMidiExport">⬇ MIDI</button>
-      <button id="btnBandMidi" style="display:none" title="Export the last band performance as a multitrack MIDI file — one track per instrument, drums on channel 10">⬇ Band MIDI</button>
+      <button id="btnBandMidi" style="display:none" title="Export as a multitrack MIDI file — the whole song when a songbook song was performed, otherwise the last band part; one track per instrument, drums on channel 10">⬇ Band MIDI</button>
       <button id="btnBandWav" style="display:none" title="Bounce to a stereo WAV file — the whole song when a songbook song was performed, otherwise the last band part; the full mix, rendered offline">⬇ WAV</button>
       <button id="btnBandSave" class="hot" style="display:none" title="Save the last band performance to the Songbook — replay it anytime with ▶ Perform">💾 Save Song</button>
       <label>Tempo <span id="tempoVal">120</span> BPM</label>
@@ -3275,6 +3275,7 @@ function wfFrame() {
 let arrState = null;
 let lastArrangement = null;                     // most recent band, for MIDI export
 let lastSongBounce = null;                      // collected parts of the current songbook song, for whole-song WAV
+let lastPerformedSongName = null;               // best-known name of the song behind lastArrangement
 const ARR_LANES = ['kick', 'snare', 'hat', 'clap', 'ride', 'conga', 'shaker', 'tamb'];
 // fallback palette for rows without an instrument (vocals, drums)
 const ARR_COLORS = ['#4ee1c8', '#e14e9e', '#f0c05a', '#7aa2ff', '#9df05a',
@@ -3474,7 +3475,8 @@ async function startArrangement(msg) {
     if (!lastSongBounce || lastSongBounce.name !== msg.song.name || (msg.song.part ?? 0) === 0)
       lastSongBounce = { name: msg.song.name, title: msg.song.title, parts: [] };
     lastSongBounce.parts[msg.song.part ?? 0] = { ...lastArrangement, gap: msg.song.gap };
-  } else lastSongBounce = null;                 // ad-hoc band — bounce just it
+    lastPerformedSongName = msg.song.name;
+  } else lastSongBounce = null;                 // ad-hoc band — resolveSongBounce may still find it on disk
   const el = $('btnBandMidi'); if (el) el.style.display = '';
   const wv = $('btnBandWav'); if (wv) wv.style.display = '';
   const sv = $('btnBandSave'); if (sv) sv.style.display = '';
@@ -3752,8 +3754,11 @@ const GM_PROGRAM = {
 };
 const GM_DRUM = { kick: 36, snare: 38, hat: 42, clap: 39, ride: 46, conga: 63, shaker: 70, tamb: 54 };
 
-function arrangementToMidiBlob(arr) {
-  const tempo = Math.max(40, Math.min(240, arr.tempo || 100));
+// Accepts one arrangement or an array of parts (a whole songbook song): parts
+// are laid back-to-back with tempo-change events at each boundary, gaps become
+// beats of silence, and same-named instrument tracks merge into one MIDI track.
+function arrangementToMidiBlob(arrOrParts, songTitle) {
+  const parts = (Array.isArray(arrOrParts) ? arrOrParts : [arrOrParts]).slice(0, 32);
   const PPQ = 480;
   const vlq = v => { const b = [v & 0x7f]; v >>= 7; while (v > 0) { b.unshift((v & 0x7f) | 0x80); v >>= 7; } return b; };
   const meta = (type, bytes) => [0xFF, type, bytes.length, ...bytes];
@@ -3769,54 +3774,94 @@ function arrangementToMidiBlob(arr) {
   };
   const tracks = [];
 
-  // conductor track: title + tempo
-  const us = Math.round(60000000 / tempo);
-  tracks.push(finishTrack([
-    [0, ...meta(0x03, ascii(arr.title || 'Muse Machine band'))],
-    [0, 0xFF, 0x51, 3, (us >> 16) & 255, (us >> 8) & 255, us & 255],
-  ]));
+  // pass 1: each part's length in beats -> its beat offset in the file
+  const partTempo = parts.map(p => Math.max(40, Math.min(240, p.tempo || 100)));
+  const offsets = [];
+  let off = 0;
+  parts.forEach((arr, i) => {
+    let end = 0;
+    for (const tr of (arr.tracks || []).slice(0, 12)) {
+      let c = Math.max(0, tr.startBeat || 0);
+      for (const n of (tr.notes || []).slice(0, 2000)) c += Math.max(0.05, n.beats || 1);
+      end = Math.max(end, c);
+    }
+    for (const v of arr.vocals || []) {
+      if (!v.notes) continue;
+      let c = Math.max(0, v.startBeat || 0);
+      for (const n of v.notes) c += Math.max(0.05, n.beats || 1);
+      end = Math.max(end, c);
+    }
+    if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
+      const dStart = Math.max(0, arr.drums.startBeat || 0);
+      end = Math.max(end, arr.drums.bars ? dStart + arr.drums.bars * 4 : (end > dStart ? end : dStart + 16));
+    }
+    offsets.push(off);
+    arr._end = end;                            // stashed for the drum pass
+    off += end + Math.max(0, arr.gap ?? 0.5) / (60 / partTempo[i]);
+  });
 
-  // instrument tracks
+  // conductor track: title + a tempo event wherever the tempo changes
+  const conductor = [[0, ...meta(0x03, ascii(songTitle || parts[0].title || 'Muse Machine band'))]];
+  parts.forEach((arr, i) => {
+    if (i > 0 && partTempo[i] === partTempo[i - 1]) return;
+    const us = Math.round(60000000 / partTempo[i]);
+    conductor.push([Math.round(offsets[i] * PPQ), 0xFF, 0x51, 3, (us >> 16) & 255, (us >> 8) & 255, us & 255]);
+  });
+  tracks.push(finishTrack(conductor));
+
+  // instrument tracks: merge segments with the same name+voice across parts
+  const groups = new Map();                    // key -> { name, prog, pan, velScale, segs }
+  const addSeg = (key, name, prog, pan, velScale, offsetBeats, startBeat, notes) => {
+    if (!groups.has(key)) groups.set(key, { name, prog, pan, velScale, segs: [] });
+    groups.get(key).segs.push({ offsetBeats, startBeat, notes });
+  };
+  parts.forEach((arr, i) => {
+    for (const tr of (arr.tracks || []).slice(0, 12)) {
+      const voice = GM_PROGRAM[tr.voice] !== undefined ? tr.voice : 'piano';
+      addSeg((tr.name || voice) + '|' + voice, tr.name || voice, GM_PROGRAM[voice], tr.pan,
+        tr.gain != null ? Math.min(1.4, tr.gain + 0.4) : 1, offsets[i], tr.startBeat, tr.notes);
+    }
+    for (const v of arr.vocals || []) {
+      if (v.notes && v.notes.length)
+        addSeg('vocal|' + (v.lyrics || '').slice(0, 24), 'vocal: ' + (v.lyrics || '').slice(0, 24),
+          54, 0, 1, offsets[i], v.startBeat, v.notes);
+    }
+  });
   let ch = 0;
   const nextCh = () => { if (ch === 9) ch++; return Math.min(15, ch++); };
-  const noteTrack = (name, prog, pan, notes, startBeat, velScale) => {
+  for (const g of groups.values()) {
     const c = nextCh();
     const evs = [
-      [0, ...meta(0x03, ascii(name))],
-      [0, 0xC0 | c, prog & 0x7f],
-      [0, 0xB0 | c, 10, Math.max(0, Math.min(127, Math.round(((pan || 0) + 1) * 63.5)))],
+      [0, ...meta(0x03, ascii(g.name))],
+      [0, 0xC0 | c, g.prog & 0x7f],
+      [0, 0xB0 | c, 10, Math.max(0, Math.min(127, Math.round(((g.pan || 0) + 1) * 63.5)))],
     ];
-    let cursor = Math.max(0, startBeat || 0);
-    for (const n of notes || []) {
-      const beats = Math.max(0.05, n.beats || 1);
-      if (!n.rest && n.pitch != null) {
-        const pitches = (Array.isArray(n.pitch) ? n.pitch : [n.pitch]).slice(0, 6);
-        const vel = Math.max(1, Math.min(127, Math.round((n.vel ?? 1) * 80 * (velScale ?? 1))));
-        const on = Math.round(cursor * PPQ), off = Math.round((cursor + beats * 0.95) * PPQ);
-        for (const p of pitches) {
-          const midi = limitMidi(typeof p === 'number' ? p : nameToMidi(p));
-          if (midi === null) continue;
-          evs.push([on, 0x90 | c, midi, vel], [off, 0x80 | c, midi, 0]);
+    for (const seg of g.segs) {
+      let cursor = seg.offsetBeats + Math.max(0, seg.startBeat || 0);
+      for (const n of (seg.notes || []).slice(0, 2000)) {
+        const beats = Math.max(0.05, n.beats || 1);
+        if (!n.rest && n.pitch != null) {
+          const pitches = (Array.isArray(n.pitch) ? n.pitch : [n.pitch]).slice(0, 6);
+          const vel = Math.max(1, Math.min(127, Math.round((n.vel ?? 1) * 80 * (g.velScale ?? 1))));
+          const on = Math.round(cursor * PPQ), offTick = Math.round((cursor + beats * 0.95) * PPQ);
+          for (const p of pitches) {
+            const midi = limitMidi(typeof p === 'number' ? p : nameToMidi(p));
+            if (midi === null) continue;
+            evs.push([on, 0x90 | c, midi, vel], [offTick, 0x80 | c, midi, 0]);
+          }
         }
+        cursor += beats;
       }
-      cursor += beats;
     }
     tracks.push(finishTrack(evs));
-    return cursor;
-  };
-
-  let endBeat = 0;
-  for (const tr of (arr.tracks || []).slice(0, 12)) {
-    const voice = GM_PROGRAM[tr.voice] !== undefined ? tr.voice : 'piano';
-    endBeat = Math.max(endBeat, noteTrack(tr.name || voice, GM_PROGRAM[voice], tr.pan, tr.notes, tr.startBeat, tr.gain != null ? Math.min(1.4, tr.gain + 0.4) : 1));
-  }
-  for (const v of arr.vocals || []) {
-    if (v.notes && v.notes.length)
-      endBeat = Math.max(endBeat, noteTrack('vocal: ' + (v.lyrics || '').slice(0, 24), 54, 0, v.notes, v.startBeat, 1));
   }
 
-  // drums, channel 10 — same step logic as the live scheduler, swing baked in
-  if (arr.drums && (arr.drums.pattern || arr.drums.steps)) {
+  // drums, channel 10 — one track for the whole show, swing baked in per part
+  const drumEvs = [[0, ...meta(0x03, ascii('drums'))]];
+  let anyDrums = false;
+  parts.forEach((arr, i) => {
+    if (!arr.drums || !(arr.drums.pattern || arr.drums.steps)) return;
+    anyDrums = true;
     const d = arr.drums;
     const lanes = {};
     if (d.steps) { for (const k of ARR_LANES) if (d.steps[k]) lanes[k] = arrStepLevels(d.steps[k]); }
@@ -3824,21 +3869,21 @@ function arrangementToMidiBlob(arr) {
     const swing = Math.max(0.5, Math.min(0.7, d.swing || BL_SWING[d.pattern] || arr.swing || 0.5));
     const len = Math.max(1, ...Object.values(lanes).map(a => a.length));
     const dStart = Math.max(0, d.startBeat || 0);
-    const dEnd = d.bars ? dStart + d.bars * 4 : (endBeat > dStart ? endBeat : dStart + 16);
-    const evs = [[0, ...meta(0x03, ascii('drums'))]];
+    const dEnd = d.bars ? dStart + d.bars * 4 : (arr._end > dStart ? arr._end : dStart + 16);
     const nSteps = Math.min(4096, Math.round((dEnd - dStart) * 4));
     for (let s = 0; s < nSteps; s++) {
-      const beat = dStart + s / 4 + (s % 2 === 1 ? (swing - 0.5) * 2 / 4 : 0);
+      const beat = offsets[i] + dStart + s / 4 + (s % 2 === 1 ? (swing - 0.5) * 2 / 4 : 0);
       const tick = Math.round(beat * PPQ);
       for (const k in lanes) {
         const lv = lanes[k][s % len];
         if (!lv) continue;
         const vel = lv > 1 ? 115 : 92;
-        evs.push([tick, 0x99, GM_DRUM[k], vel], [tick + PPQ / 8, 0x89, GM_DRUM[k], 0]);
+        drumEvs.push([tick, 0x99, GM_DRUM[k], vel], [tick + PPQ / 8, 0x89, GM_DRUM[k], 0]);
       }
     }
-    tracks.push(finishTrack(evs));
-  }
+  });
+  parts.forEach(arr => delete arr._end);
+  if (anyDrums) tracks.push(finishTrack(drumEvs));
 
   const bytes = [0x4D, 0x54, 0x68, 0x64, 0, 0, 0, 6, 0, 1,
                  (tracks.length >> 8) & 255, tracks.length & 255, (PPQ >> 8) & 255, PPQ & 255];
@@ -4059,20 +4104,58 @@ $('humStyle').addEventListener('keydown', e => { if (e.key === 'Enter') produceH
 $('btnCompose').onclick = composeTune;
 $('btnHarmonize').onclick = runHarmonize;
 $('btnMidiExport').onclick = () => download(tuneToMidiBlob(), (currentTune.title || 'muse-tune').replace(/[^\w -]+/g, '') + '.mid');
-$('btnBandMidi').onclick = () => {
+// ---- whole-song export: find the songbook song behind the last performance ----
+// Three sources, most to least direct: parts tagged live by the bridge, the
+// song name we performed from this page, or a scan of songs/ on disk matching
+// the last part we heard. Falls back to null (= export just the last part).
+function songFileToBounce(song, fallbackName) {
+  const tempo = song.tempo || 100;
+  const parts = (song.parts || []).filter(p => p.kind === 'arrangement').map(p => ({
+    title: p.title || song.title || song.name, tempo: p.tempo || tempo,
+    swing: p.swing, pump: p.pump, humanize: p.humanize, sheet: p.sheet,
+    tracks: p.tracks, drums: p.drums, vocals: p.vocals, gap: p.gap,
+  }));
+  return parts.length ? { name: song.name || fallbackName, title: song.title || fallbackName, parts } : null;
+}
+async function fetchSongBounce(name) {
+  const r = await fetch('songs/' + encodeURIComponent(name) + '.json', { cache: 'no-store' });
+  if (!r.ok) return null;
+  return songFileToBounce(await r.json(), name);
+}
+function bounceHasLastPart(b) {
+  return b && lastArrangement && b.parts.some(p => p.title === lastArrangement.title &&
+    (p.tracks || []).length === (lastArrangement.tracks || []).length);
+}
+async function resolveSongBounce() {
+  if (lastSongBounce && lastSongBounce.parts.filter(Boolean).length)
+    return { ...lastSongBounce, parts: lastSongBounce.parts.filter(Boolean) };
+  if (!lastArrangement) return null;
+  if (lastPerformedSongName) {
+    const b = await fetchSongBounce(lastPerformedSongName).catch(() => null);
+    if (bounceHasLastPart(b)) return b;
+  }
+  const matches = [];
+  for (const s of sbSongs) {
+    const b = await fetchSongBounce(s.name).catch(() => null);
+    if (bounceHasLastPart(b)) matches.push(b);
+  }
+  return matches.length === 1 ? matches[0] : null;   // ambiguous -> stay safe
+}
+$('btnBandMidi').onclick = async () => {
   if (!lastArrangement) return;
-  download(arrangementToMidiBlob(lastArrangement),
-    (lastArrangement.title || 'muse-band').replace(/[^\w -]+/g, '') + '.mid');
+  const bounce = await resolveSongBounce();
+  const title = bounce ? bounce.title || bounce.name : lastArrangement.title;
+  download(arrangementToMidiBlob(bounce ? bounce.parts : lastArrangement, title),
+    (title || 'muse-band').replace(/[^\w -]+/g, '') + '.mid');
 };
 $('btnBandWav').onclick = async () => {
   if (!lastArrangement) return;
   const btn = $('btnBandWav');
   btn.disabled = true; btn.textContent = '⏳ rendering…';
   try {
-    const songParts = lastSongBounce ? lastSongBounce.parts.filter(Boolean) : [];
-    const wholeSong = songParts.length > 0;
-    download(await renderArrangementToWav(wholeSong ? songParts : lastArrangement),
-      ((wholeSong ? lastSongBounce.title || lastSongBounce.name : lastArrangement.title)
+    const bounce = await resolveSongBounce();
+    download(await renderArrangementToWav(bounce ? bounce.parts : lastArrangement),
+      ((bounce ? bounce.title || bounce.name : lastArrangement.title)
         || 'muse-band').replace(/[^\w -]+/g, '') + '.wav');
   } catch (e) {
     $('stats').textContent = '⚠️ bounce failed: ' + e.message;
@@ -4888,8 +4971,10 @@ function handleMcpPush(msg) {
 }
 $('sbPlay').onclick = () => {
   ensureAudio();
-  if (mcpWs && $('sbSel').value)
+  if (mcpWs && $('sbSel').value) {
+    lastPerformedSongName = $('sbSel').value;   // whole-song export hint
     mcpWs.send(JSON.stringify({ pageReq: 'play_song', name: $('sbSel').value }));
+  }
 };
 $('sbStop').onclick = () => {
   if (mcpWs) mcpWs.send(JSON.stringify({ pageReq: 'stop_song' }));
